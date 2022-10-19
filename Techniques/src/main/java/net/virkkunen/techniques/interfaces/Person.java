@@ -11,6 +11,16 @@ package net.virkkunen.techniques.interfaces;
 public class Person implements Worker,Comparable {
     
     private String name = "Solja";
+    private int age = 1;
+    
+    public Person() {
+        
+    }
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
        
     @Override
     public void pay(double amount) {
@@ -25,6 +35,12 @@ public class Person implements Worker,Comparable {
     public void setName(String name) {
         this.name = name;
     }
+    
+    @Override
+    public String toString() {
+        return this.name + " on " + this.getAge() + " vuotta vanha";
+    }
+    
     @Override
     public boolean equals(Object o){
         System.out.println("equals");
@@ -44,6 +60,20 @@ public class Person implements Worker,Comparable {
     public int compareTo(Object o) {
         Person p = (Person)o;
         return this.name.compareTo(p.name);
+    }
+
+    /**
+     * @return the age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
     }
     
     

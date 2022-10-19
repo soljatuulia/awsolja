@@ -12,7 +12,7 @@ public class Techniques {
 
     public static void main(String[] args) {
         
-        CollectionsTest.setTests();
+        CollectionsTest.personArrayTests();
         
     }
 }
