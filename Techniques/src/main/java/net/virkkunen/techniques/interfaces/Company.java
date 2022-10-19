@@ -9,21 +9,19 @@ public class Company implements Worker {
     
     private String name;
     
+    public Company(String name) {
+        this.name = name;
+    }
+    
     public void pay(double amount) {
         System.out.println(this.getName() + " invoices " + amount + " EUR + VAT " +
                 amount * 0.24 + " EUR");
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
