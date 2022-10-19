@@ -2,6 +2,7 @@
 package net.virkkunen.techniques.collections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,22 +17,31 @@ public class CollectionsTest {
     
     static ArrayList<Person> persons = new ArrayList<Person>();
     
-    public static void showPersons() {
-        System.out.println("Henkilöt:");
-        
+    static {
         Person p1 = new Person("Lissu", 44);
         Person p2 = new Person("Hissu", 99);
         Person p3 = new Person("Kissu", 2);
+        Person p4 = new Person();
         persons.add(p1);
         persons.add(p2);
         persons.add(p3);
-        
+        persons.add(p4);
+    }
+    
+    public static void showPersons() {
+        System.out.println("Henkilöt:");
         for(Person p : persons) {
             System.out.println(p);
-        }
+        }        
     }
     
     public static void personArrayTests() {
+        showPersons();
+        
+        persons.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+        showPersons();
+        
+        persons.sort((p1, p2) -> p1.getAge()-p2.getAge());
         showPersons();
     }
     
