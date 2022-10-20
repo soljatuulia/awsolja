@@ -1,10 +1,13 @@
 
 package net.tutorit.cpharjoitus1;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -87,14 +90,18 @@ public class CPHarjoitus1 {
     }
     
     static LocalDateTime nextWednesdayAtNine(){
-        return null;
+        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime nextWednesday = dateTime.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY)).withHour(9).withMinute(0).withSecond(0).withNano(0);
+        return nextWednesday;
+        
     }
     
     static LocalDate askForDate(){
         // Lue käyttäjän syöte (suomalaisittain) "20.10.2022" ja palauta se LocalDate:na
-        String date = "20.10.2022";
-        LocalDate localDate = LocalDate.parse(date);
-        return localDate;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate date = LocalDate.parse("20.10.2022", formatter);        
+        return date;
     }
     
     public static void main(String[] args) {
