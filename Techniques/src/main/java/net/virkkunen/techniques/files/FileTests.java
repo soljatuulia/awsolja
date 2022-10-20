@@ -71,6 +71,7 @@ public class FileTests {
             System.out.println("Virhe lukemisessa");
         }
         
+        // nio-paketti suositeltava tiedostokäsittelyyn
         Path path = Paths.get("C:\\javatraining\\awsolja\\file4.txt");
         try { Files.lines(path).forEach(System.out::println);
         } catch (IOException ex) {
