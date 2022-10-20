@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class FileTests {
     
+    public static void simpleLine() {
+        
+    }
+    
     public static void createFile() {
         try (PrintWriter writer = new PrintWriter("C:\\javatraining\\awsolja\\file3.txt")) {
             writer.println("Tokaan tiedostoon lisätty tekstiä.");
@@ -71,7 +75,7 @@ public class FileTests {
             System.out.println("Virhe lukemisessa");
         }
         
-        // nio-paketti suositeltava tiedostokäsittelyyn
+        // nio-paketti suositeltava tiedostokäsittelyyn -- katso Jyrkiltä toimiva koodi (ei alla oleva)
         Path path = Paths.get("C:\\javatraining\\awsolja\\file4.txt");
         try { Files.lines(path).forEach(System.out::println);
         } catch (IOException ex) {

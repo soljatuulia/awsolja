@@ -1,18 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
 
 package net.tutorit.cpharjoitus1;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
  * @author jyrki
  */
 public class CPHarjoitus1 {
+    
+    static final ArrayList<Pet> pets=new ArrayList<>();
+    
     /*
     Koodia kannattaa lukea alhaalta ylöspäin
     */
@@ -58,8 +59,29 @@ public class CPHarjoitus1 {
     static void veterinarianTester(){
         Dog d=new Dog("Hurtta");
         Cat c=new Cat("Misu");
+        veterinarianTreats(d);
+        veterinarianTreats(d);
     }
     */
+    
+    
+    static void getBasicInfo() {
+        System.out.println(Pet.getBreed() + " (" + Pet.getName() + ")");
+    }
+    
+    static void veterinarianTreats(Pet p) {
+        System.out.println("Sairaskertomus: " + p.getBasicInfo());
+    }
+
+    
+    static void veterinarianTester() {
+        
+        Dog d = new Dog("Hurtta");
+        Cat c = new Cat("Misu");
+        veterinarianTreats(c);
+        veterinarianTreats(d);
+    }
+    
     static String justDate(LocalDateTime dt){
         return "";
     }
@@ -74,6 +96,11 @@ public class CPHarjoitus1 {
     
     static LocalDate askForDate(){
         // Lue käyttäjän syöte (suomalaisittain) "20.10.2022" ja palauta se LocalDate:na
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String dateString = formatter.format(currentDate);
+        System.out.println(dateString);        
+        
         return null;
     }
     

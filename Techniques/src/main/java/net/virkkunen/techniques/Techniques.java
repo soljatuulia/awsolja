@@ -13,7 +13,7 @@ public class Techniques {
 
     public static void main(String[] args) {
         
-        FileTests.createFile();
-        FileTests.readFromFile();
+        DateTests.localeTests2();
+        
     }
 }
