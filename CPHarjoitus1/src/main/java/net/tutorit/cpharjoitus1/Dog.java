@@ -8,17 +8,17 @@ package net.tutorit.cpharjoitus1;
  *
  * @author Solja
  */
-public class Dog extends Pet{
+public class Dog implements Pet{
     
-    public Dog(String name, String breed) {
-        super(name, breed);
-    }
+    private String name;
     
     public Dog(String name) {
-        super(name);
+        this.name = name;
     }
-    
-    public Dog() {
-        
+
+    @Override
+    public String getBasicInfo() {
+        return "Sekarotuinen " + this.name;
     }
+   
 }

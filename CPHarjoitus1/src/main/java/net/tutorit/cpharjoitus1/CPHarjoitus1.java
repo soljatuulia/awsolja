@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -63,11 +64,7 @@ public class CPHarjoitus1 {
         veterinarianTreats(d);
     }
     */
-    
-    
-    static void getBasicInfo() {
-        System.out.println(Pet.getBreed() + " (" + Pet.getName() + ")");
-    }
+   
     
     static void veterinarianTreats(Pet p) {
         System.out.println("Sairaskertomus: " + p.getBasicInfo());
@@ -75,7 +72,6 @@ public class CPHarjoitus1 {
 
     
     static void veterinarianTester() {
-        
         Dog d = new Dog("Hurtta");
         Cat c = new Cat("Misu");
         veterinarianTreats(c);
@@ -96,12 +92,9 @@ public class CPHarjoitus1 {
     
     static LocalDate askForDate(){
         // Lue käyttäjän syöte (suomalaisittain) "20.10.2022" ja palauta se LocalDate:na
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateString = formatter.format(currentDate);
-        System.out.println(dateString);        
-        
-        return null;
+        String date = "20.10.2022";
+        LocalDate localDate = LocalDate.parse(date);
+        return localDate;
     }
     
     public static void main(String[] args) {
@@ -111,6 +104,7 @@ public class CPHarjoitus1 {
         System.out.println("On 20.10.2020 jälkeen: "+isDateAfter(nextWednesdayAtNine(),2020,10,20));
         System.out.println("On 1.6.2023 jälkeen: "+isDateAfter(nextWednesdayAtNine(),2023,6,1));
         System.out.println("Pelkkä päivämäärä: "+justDate(nextWednesdayAtNine()));
+        veterinarianTester();
         // Myös seuraavat pitäisi saada pois kommenteista....
         //veterinarianTester();
         //companyTester();

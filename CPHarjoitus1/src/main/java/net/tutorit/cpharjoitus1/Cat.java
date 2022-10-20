@@ -8,17 +8,17 @@ package net.tutorit.cpharjoitus1;
  *
  * @author Solja
  */
-public class Cat extends Pet {
-        
-    public Cat(String name, String breed) {
-        super(name, breed);
-    }
+public class Cat implements Pet {
     
+    private String name;
+        
     public Cat(String name) {
-        super(name);
+        this.name = name;
+    }
+
+    @Override
+    public String getBasicInfo() {
+        return "Norjalainen metsäkissa " + this.name;
     }
     
-    public Cat() {
-        
-    }
 }
