@@ -3,10 +3,12 @@ package net.virkkunen.techniques.collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import net.virkkunen.techniques.interfaces.Person;
 
 /**
@@ -43,6 +45,21 @@ public class CollectionsTest {
         
         persons.sort((p1, p2) -> p1.getAge()-p2.getAge());
         showPersons();
+    }
+    
+    public static void personStreamTests() {
+        ArrayList<Person> sortedList = (ArrayList<Person>) persons
+                .stream()
+                .sorted(Comparator.comparingInt(Person::getAge))
+                .collect(Collectors.toList());
+        
+        sortedList.forEach(System.out::println);
+        
+        // Tee sama kuin yllä lambdalla
+
+        ArrayList<Person> greaterThan = persons.stream()
+                
+                
     }
     
     public static void mapTests() {
