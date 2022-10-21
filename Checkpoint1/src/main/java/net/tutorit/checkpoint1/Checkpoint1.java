@@ -8,6 +8,7 @@ package net.tutorit.checkpoint1;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /* ARVIOINTIPERUSTEET
 Läpipääsyyn: (=1pt)
@@ -38,7 +39,6 @@ public class Checkpoint1 {
         Joudut siis tekemään vielä pari luokkaa
     */
     static void bankingTester(){
-    /*    
         // Pankkitili: Tilinomistaja ja alkusaldo
         Account acc=new Account("Tiina Tilinolmistaja",5250);
         // Tehdään uusia tapahtumia tilille
@@ -49,9 +49,9 @@ public class Checkpoint1 {
         acc.transaction(-15.90,LocalDate.of(2022, 3, 1));
         acc.transaction(-232.21,LocalDate.of(2022, 3, 7));
         // Haetaan helmikuun tapahtumat
-        List<Transaction> transactions=acc.getTransactionsOf(2022,2);
+        List<Transaction> transactions=acc.getAll();
+        // TAI PAREMMIN List<Transaction> transactions=acc.getTransactionsOf(2022,2);
         // Jos ylläoleva tuntuu mahdottomalta, niin tyydyttävästi kelpaa myös
-        // List<Transaction> transactions=acc.getAll();
         System.out.println("Helmikuun 2022 tapahtumat");
         for(Transaction t:transactions){
            System.out.println(t.getDate().toString()+", "+t.getAmount());
@@ -64,28 +64,17 @@ public class Checkpoint1 {
         // Lisäpisteitä loppusaldon esittämisestä
         // Tilitapahtumat omille riveilleen halutulla tapaa muotoiltuna
         acc.export("tapahtumat.txt");
-    */
     }
-    
-    /*
-    Laajenna koodia siten, että saat alla olevat kaksi metodia toimimaan
-    */
-    /*
+
     static void weSellStuff(Merchandise merch){
         System.out.println("Nyt myydään "+merch.getName()+" hintaan "+merch.getPrice());
     }
-    */
-    static void weSellStuff(Merchendise merch) {
-        System.out.println("Nyt myydään " + merch.getName() + " hintaan " + merch.getPrice());
-    }
-    
+
     static void shopTester(){
-        /*
         Television tv=new Television("LG televisio",2000);
         Microwave mw=new Microwave("Philips mikroaaltouuni",400);
         weSellStuff(tv);
         weSellStuff(mw);
-        */
     }
     static boolean isWorkingHours(LocalDateTime dt){
         // Palauta onko annettu päiväys työaikaa (Ma-Pe, 9:00-17:00)
@@ -99,15 +88,8 @@ public class Checkpoint1 {
     
     static LocalDate greetingsFromNY(){
         String dateString="5/6/23";
-        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy");
-
         LocalDate localDate = LocalDate.parse(dateString, formatter);
-        /* 
-            Amerikkalainen tietojärjestelmä antaa sinulle päivämäärän ylläkuvattuna merkkijonona.
-            Palauta LocalDate-objekti, joka kuvaa samaa päivämäärää.
-            Aikavyöhykkeitä ei tarvitse miettiä.
-        */
         return localDate;        
     }
     

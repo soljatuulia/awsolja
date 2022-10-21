@@ -8,6 +8,9 @@ package net.tutorit.checkpoint1;
  *
  * @author Solja
  */
-public interface Merchendise {
+public interface Merchandise {
     
+    String getName();
+    
+    int getPrice();
 }
