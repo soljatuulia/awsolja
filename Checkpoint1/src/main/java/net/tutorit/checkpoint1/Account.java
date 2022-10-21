@@ -38,13 +38,29 @@ public class Account {
         this.amount = amount;
     }
     
-    public void transaction(double amount, LocalDate date) {
+    public void transaction(double amount, LocalDate date) { // ei tarvitse olla public? ks. Jyrkin esimerkki
         transactions.add(new Transaction(amount, date));
     }
     
     List<Transaction> getAll() {
         return transactions;
     }
+    
+    /*
+    OLISI OLLUT HYVÄ!
+    List<Transaction> getTransactionOf(int y, int m) {
+        ArrayList<Transaction> ret = new ArrayList<>();
+        for (Transaction t : transactions) {
+            if ((t.getDate().getYear() == y) && (t.getDate().getMonth() == m)) ret.add(t);
+        }   
+        return ret;
+    
+        TAI SAMA STREAMILLA:
+        List<Transaction> ret = transactions.stream()
+            .filter(t -> (t.getDate().getYear() == y) && (t.getDate().getMonth() == m))
+            .collect(Collectors.toList());
+        return ret;
+    */
     
     void export(String file) {
         try(PrintWriter fw=new PrintWriter(file)) {
@@ -61,5 +77,20 @@ public class Account {
         catch(IOException ex){
             System.out.println("Virhe: "+ex.getMessage());
         }
-    }    
+    } 
+    
+    /*
+    TAI PAREMMIN
+    try (PrintWriter pw = new PrintWriter(new FileWriter(fn))) {
+        pw.println(name);
+        pw.println(amount);
+        double finalBalance = amount;
+        for (Transaction t : transactions) {
+            finalBalance += t.getAmount();
+            pw.println(t.getDate() + " " + t.getAmount());
+    }
+    catch(IOException ex) {
+    System.out.println("Export epäonnistui");
+    }
+    */
 }

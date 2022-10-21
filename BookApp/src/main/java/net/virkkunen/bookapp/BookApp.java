@@ -19,6 +19,7 @@ public class BookApp {
         bookstore.add(book1);
         bookstore.add(book2);
         
-        System.out.println(bookstore.showList());
+        bookstore.showList();
+        System.out.println(bookstore.showList("Tolkien"));
     }
 }

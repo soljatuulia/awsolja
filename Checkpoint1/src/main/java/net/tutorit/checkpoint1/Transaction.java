@@ -33,5 +33,11 @@ public class Transaction {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    String getDescription() {
+        String tx = "Pano";
+        if (amount < 0) tx = "Otto";
+        return tx + " " + date + " " + amount;
+    }
         
 }

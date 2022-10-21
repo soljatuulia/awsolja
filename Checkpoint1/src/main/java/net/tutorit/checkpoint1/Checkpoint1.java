@@ -58,10 +58,11 @@ public class Checkpoint1 {
         // Jos ylläoleva tuntuu mahdottomalta, niin tyydyttävästi kelpaa myös
         System.out.println("Helmikuun 2022 tapahtumat");
         for(Transaction t:transactions){
-           System.out.println(t.getDate().toString()+", "+t.getAmount());
+           // System.out.println(t.getDate().toString()+", "+t.getAmount());
            // Yllä oleva riittää. Lisäpistemahdollisuus jos tuloste tulee fiksusti toteutettuna
            // Muodossa "Otto 20.2.2022, -14.11"
-           // Kutsumalla System.out.println(t.getDescription());
+           // Kutsumalla 
+            System.out.println(t.getDescription());
         }
         // Viedään tilitapahtumat tiedostoon
         // Tiedoston alkuun tilinomistaja sekä alkusaldo

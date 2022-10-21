@@ -1,7 +1,7 @@
 Tiina Tilinolmistaja, alkusaldo 5250.0
-net.tutorit.checkpoint1.Transaction@1810399e
-net.tutorit.checkpoint1.Transaction@32d992b2
-net.tutorit.checkpoint1.Transaction@215be6bb
-net.tutorit.checkpoint1.Transaction@4439f31e
-net.tutorit.checkpoint1.Transaction@5dfcfece
-net.tutorit.checkpoint1.Transaction@23ceabc1
+net.tutorit.checkpoint1.Transaction@4678c730
+net.tutorit.checkpoint1.Transaction@6767c1fc
+net.tutorit.checkpoint1.Transaction@29ee9faa
+net.tutorit.checkpoint1.Transaction@c038203
+net.tutorit.checkpoint1.Transaction@cc285f4
+net.tutorit.checkpoint1.Transaction@55f3ddb1

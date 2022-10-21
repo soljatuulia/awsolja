@@ -36,7 +36,7 @@ public class Book {
     
     
     public String toString() {
-        return this.title + " by " + this.author + " (" + this.price + " €) " + this.getCopies() + " copies, published " + this.getPublished();
+        return this.title + " by " + this.getAuthor() + " (" + this.price + " €) " + this.getCopies() + " copies, published " + this.getPublished();
     }
 
     public YearMonth getPublished() {
@@ -65,6 +65,20 @@ public class Book {
      */
     public void setCopies(int copies) {
         this.copies = copies;
+    }
+
+    /**
+     * @return the author
+     */
+    public String getAuthor() {
+        return author;
+    }
+
+    /**
+     * @param author the author to set
+     */
+    public void setAuthor(String author) {
+        this.author = author;
     }
             
     
