@@ -7,6 +7,7 @@ package net.tutorit.checkpoint1;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /* ARVIOINTIPERUSTEET
 Läpipääsyyn: (=1pt)
@@ -25,7 +26,7 @@ Täydellinen suoritus (=3pt)
 
 /**
  *
- * @author jyrki
+ * @author solja
  */
 public class Checkpoint1 {
     /*
@@ -74,6 +75,10 @@ public class Checkpoint1 {
         System.out.println("Nyt myydään "+merch.getName()+" hintaan "+merch.getPrice());
     }
     */
+    static void weSellStuff(Merchendise merch) {
+        System.out.println("Nyt myydään " + merch.getName() + " hintaan " + merch.getPrice());
+    }
+    
     static void shopTester(){
         /*
         Television tv=new Television("LG televisio",2000);
@@ -94,12 +99,16 @@ public class Checkpoint1 {
     
     static LocalDate greetingsFromNY(){
         String dateString="5/6/23";
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy");
+
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
         /* 
             Amerikkalainen tietojärjestelmä antaa sinulle päivämäärän ylläkuvattuna merkkijonona.
             Palauta LocalDate-objekti, joka kuvaa samaa päivämäärää.
             Aikavyöhykkeitä ei tarvitse miettiä.
         */
-        return null;        
+        return localDate;        
     }
     
     public static void main(String[] args) {
