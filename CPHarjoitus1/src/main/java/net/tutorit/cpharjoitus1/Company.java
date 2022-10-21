@@ -17,15 +17,11 @@ import java.util.stream.Collectors;
  */
 public class Company {
     
-    static final ArrayList<Person> employees = new ArrayList<>();
+    private ArrayList<Person> employees = new ArrayList<>();
     private String name;
     
     public Company(String name) {
         this.name = name;
-    }
-    
-    public void addEmployee(Person p) {
-        employees.add(p);
     }
     
     public void addEmployee(String name, LocalDate startDate) {
@@ -37,9 +33,7 @@ public class Company {
     }
     
     List<Person> getAll() {
-        employees.sort((a,b) -> {
-            return a.getName().compareTo(b.getName());
-        });
+        employees.sort((a,b) -> a.getName().compareTo(b.getName()));
         return employees;
     }
     
@@ -52,9 +46,6 @@ public class Company {
             }
             return name + " ei ole työntekijärekisterissä";
         }
-    }
-
-    List <Person> getStillEmployed
 
     void exportEmployees(String fn) {
         try(PrintWriter fw=new PrintWriter(fn)) {
@@ -70,8 +61,11 @@ public class Company {
     }        
     
     List <Person> getStillEmployed() {
-        
+        List<Person> stillworking = employees.stream()
+                .filter(p -> p.getEndDate()==null)
+                .sorted((a,b) -> a.getStartDate().compareTo(b.getStartDate()))
+                .collect(Collectors.toList());
+        return stillworking;
     }
-    
 
 }

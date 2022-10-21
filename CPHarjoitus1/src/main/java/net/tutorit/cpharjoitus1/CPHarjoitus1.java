@@ -105,11 +105,13 @@ public class CPHarjoitus1 {
     }
     
     static String justDate(LocalDateTime dt){
-        return "";
+        return dt.toLocalDate().toString();
     }
     
     static boolean isDateAfter(LocalDateTime dt,int year,int month, int day){
-        return false;
+        LocalDate dtTest=LocalDate.of(year, month,day);
+        LocalDate orig=dt.toLocalDate();
+        return dtTest.isAfter(orig);
     }
     
     static LocalDateTime nextWednesdayAtNine(){
