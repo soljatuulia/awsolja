@@ -5,9 +5,13 @@
 
 package net.tutorit.checkpoint1;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
+import static java.time.temporal.TemporalAdjusters.firstInMonth;
 import java.util.List;
 
 /* ARVIOINTIPERUSTEET
@@ -78,12 +82,18 @@ public class Checkpoint1 {
     }
     static boolean isWorkingHours(LocalDateTime dt){
         // Palauta onko annettu päiväys työaikaa (Ma-Pe, 9:00-17:00)
+        
+
+        
         return false;
     }
     
     static LocalDate firstMondayOfNextMonth(){
         // Palauta seuraavan kuukauden ensimmäisen maanantain päivämäärä.
-        return null;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate firstMonday = currentDate.plusMonths(1).with(firstInMonth(DayOfWeek.MONDAY));
+    
+        return firstMonday;
     }
     
     static LocalDate greetingsFromNY(){

@@ -48,9 +48,13 @@ public class Account {
     
     void export(String file) {
         try(PrintWriter fw=new PrintWriter(file)) {
+            String s = getName();
+            double d = getAmount();
+            fw.println(s + ", alkusaldo " + d);
+            
             for(Transaction t: transactions){
-                List<Transaction> s=this.getAll();
-                fw.println(s);
+                String list = this.getAll().toString();
+                fw.println(t);
             }
             fw.close();
         }

@@ -1,6 +1,7 @@
-[net.tutorit.checkpoint1.Transaction@4411d970, net.tutorit.checkpoint1.Transaction@6442b0a6, net.tutorit.checkpoint1.Transaction@60f82f98, net.tutorit.checkpoint1.Transaction@35f983a6, net.tutorit.checkpoint1.Transaction@7f690630, net.tutorit.checkpoint1.Transaction@edf4efb]
-[net.tutorit.checkpoint1.Transaction@4411d970, net.tutorit.checkpoint1.Transaction@6442b0a6, net.tutorit.checkpoint1.Transaction@60f82f98, net.tutorit.checkpoint1.Transaction@35f983a6, net.tutorit.checkpoint1.Transaction@7f690630, net.tutorit.checkpoint1.Transaction@edf4efb]
-[net.tutorit.checkpoint1.Transaction@4411d970, net.tutorit.checkpoint1.Transaction@6442b0a6, net.tutorit.checkpoint1.Transaction@60f82f98, net.tutorit.checkpoint1.Transaction@35f983a6, net.tutorit.checkpoint1.Transaction@7f690630, net.tutorit.checkpoint1.Transaction@edf4efb]
-[net.tutorit.checkpoint1.Transaction@4411d970, net.tutorit.checkpoint1.Transaction@6442b0a6, net.tutorit.checkpoint1.Transaction@60f82f98, net.tutorit.checkpoint1.Transaction@35f983a6, net.tutorit.checkpoint1.Transaction@7f690630, net.tutorit.checkpoint1.Transaction@edf4efb]
-[net.tutorit.checkpoint1.Transaction@4411d970, net.tutorit.checkpoint1.Transaction@6442b0a6, net.tutorit.checkpoint1.Transaction@60f82f98, net.tutorit.checkpoint1.Transaction@35f983a6, net.tutorit.checkpoint1.Transaction@7f690630, net.tutorit.checkpoint1.Transaction@edf4efb]
-[net.tutorit.checkpoint1.Transaction@4411d970, net.tutorit.checkpoint1.Transaction@6442b0a6, net.tutorit.checkpoint1.Transaction@60f82f98, net.tutorit.checkpoint1.Transaction@35f983a6, net.tutorit.checkpoint1.Transaction@7f690630, net.tutorit.checkpoint1.Transaction@edf4efb]
+Tiina Tilinolmistaja, alkusaldo 5250.0
+net.tutorit.checkpoint1.Transaction@1810399e
+net.tutorit.checkpoint1.Transaction@32d992b2
+net.tutorit.checkpoint1.Transaction@215be6bb
+net.tutorit.checkpoint1.Transaction@4439f31e
+net.tutorit.checkpoint1.Transaction@5dfcfece
+net.tutorit.checkpoint1.Transaction@23ceabc1
