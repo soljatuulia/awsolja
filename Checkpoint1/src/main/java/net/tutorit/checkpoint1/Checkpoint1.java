@@ -98,7 +98,7 @@ public class Checkpoint1 {
     
     static LocalDate greetingsFromNY(){
         String dateString="5/6/23";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;        
     }
