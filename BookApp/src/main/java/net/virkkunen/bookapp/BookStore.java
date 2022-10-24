@@ -2,6 +2,8 @@
 package net.virkkunen.bookapp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
@@ -44,4 +46,31 @@ public class BookStore {
         return ret;
     }
     
+    public void sortByTitle() {
+        System.out.println("Sorted by title:");
+        books.sort((a,b) -> a.getTitle().compareTo(b.getTitle()));
+        for(Book b:books){
+            System.out.println(b);
+        }
+    }
+    
+    public void sortByAuthor() {
+        System.out.println("Sorted by author:");
+        books.sort((a,b) -> a.getAuthor().compareTo(b.getAuthor()));
+        for(Book b:books){
+            System.out.println(b);
+        }
+    }
+    
+    public void sort(Comparator comp) {
+        Collections.sort(books, Book.getCompByName());
+    }
+    
+    public void print(double minPrice) {
+        /*
+        Only print books more expensive that minPrice , but they should be
+        printed in of their title 
+        */
+    }
+}
 }
