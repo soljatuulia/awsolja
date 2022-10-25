@@ -1,6 +1,7 @@
 
 package net.virkkunen.report;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,26 +12,26 @@ import java.util.ArrayList;
 public class PersonReport extends ScreenReporter {
     
     private ArrayList<Person> persons = new ArrayList<>();
-    private ScreenReporter rep = new ScreenReporter();  
+    private Reporter reporter;
 
-    public PersonReport() {
-        this.persons = persons;
-        this.rep = new ScreenReporter();
-        rep.addColumn("Name", 20);
-        rep.addColumn("Age", 5);
+    public PersonReport(Reporter rep) {
+        reporter = rep;
+        reporter.addColumn("Name", 20);
+        reporter.addColumn("Age", 5);
     }
     
     public void addData(Person person) {
         persons.add(person);
     }
     
-    public void doReport() {
-        rep.printColumns();
+    public void doReport() throws IOException {
+        reporter.beginReport();
+        reporter.printColumns();
         for (Person p : persons) {
-            rep.printData(p.getName());
-            rep.printData(p.getAge());
+            reporter.printData(p.getName());
+            reporter.printData(p.getAge());
         }
-        
+        reporter.endReport();
     }
 
 }

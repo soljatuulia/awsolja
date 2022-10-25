@@ -18,10 +18,6 @@ public class ColumnDef {
     public String getTitle() {
         return title;
     }
-    
-    public int getTitleLength() {
-        return title.length();g
-    }
 
     public void setTitle(String title) {
         this.title = title;
