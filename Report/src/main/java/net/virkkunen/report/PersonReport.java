@@ -1,37 +1,23 @@
 
 package net.virkkunen.report;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 /**
  *
  * @author Solja
  */
-public class PersonReport extends ScreenReporter {
-    
-    private ArrayList<Person> persons = new ArrayList<>();
-    private Reporter reporter;
+public class PersonReport extends ReportBase<Person> {
 
-    public PersonReport(Reporter rep) {
-        reporter = rep;
-        reporter.addColumn("Name", 20);
-        reporter.addColumn("Age", 5);
+    public PersonReport(Reporter reporter){
+        super(reporter);
     }
     
-    public void addData(Person person) {
-        persons.add(person);
+    protected void addColumns(Reporter reporter){
+        reporter.addColumn("Name",20);
+        reporter.addColumn("Age",5);
     }
     
-    public void doReport() throws IOException {
-        reporter.beginReport();
-        reporter.printColumns();
-        for (Person p : persons) {
-            reporter.printData(p.getName());
-            reporter.printData(p.getAge());
-        }
-        reporter.endReport();
+    protected void printData(Reporter reporter, Person p){
+        reporter.printData(p.getName());
+        reporter.printData(p.getAge());
     }
 
 }

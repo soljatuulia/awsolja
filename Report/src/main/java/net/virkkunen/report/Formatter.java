@@ -4,16 +4,16 @@
  */
 package net.virkkunen.report;
 
+import java.util.List;
+
 /**
  *
  * @author Solja
  */
-public interface Reporter {
+public interface Formatter {
     
-    void beginReport();
-    void endReport();
-    void addColumn(String title, int width);
-    void printData(String data);
-    void printData(int data);
+    String begin(List<ColumnDef> defs);
+    String end(List<ColumnDef> defs);
+    String row(List<ColumnDef> defs, List<String> data);
 
 }

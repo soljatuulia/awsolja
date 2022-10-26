@@ -2,11 +2,7 @@
 package net.virkkunen.report;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -15,28 +11,23 @@ import java.util.logging.Logger;
 public class FileReporter extends ReporterBase {
    
     private String fileName;
-    private PrintWriter out;
-    
-//    public FileReporter() {
-//        
-//    }
-//    
-    public FileReporter(String fileName) {
+       
+    public FileReporter(Formatter formatter, String fileName) {
+        super(formatter);
         this.fileName = fileName;
     }
     
     protected PrintWriter getWriter(){
         try { 
             return new PrintWriter(new FileWriter(fileName));
-            } catch (Exception e) {
+        } catch (Exception e) {
                 System.out.println("Epäonnistui.");
             }
         return null;
     }
 
-    @Override
-    protected void CloseWriter(PrintWriter pw) {
-        
+    protected void closeWriter(PrintWriter pw) {
+        pw.close();
     }
     
 }
