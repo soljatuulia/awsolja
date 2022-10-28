@@ -25,5 +25,9 @@ public class Encyclopedia extends Book {
     void print() {
         System.out.println(getTitle() + " has " +getPages() + " pages");
     }  
+    
+    public String toString() {
+        return "Huge book";
+    }
        
 }
