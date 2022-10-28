@@ -4,17 +4,20 @@
  */
 package net.tutorit.checkpoint2;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author jyrki
+ * @author Solja
  */
-public class NewspaperList extends MediaList<Newspaper> {
-    
-    @Override
-    public String getAll(Newspaper med) {
-        return med.getDescription();
-    }
+abstract public class TVBase {
 
+    private String name;
+    
+    public TVBase(String name) {
+        this.name = name;
+    }
+    
+    public void print() {
+        System.out.println(this.name + ", " + toString());
+    }
+    
 }

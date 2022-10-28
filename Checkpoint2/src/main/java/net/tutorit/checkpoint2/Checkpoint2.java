@@ -7,7 +7,7 @@ package net.tutorit.checkpoint2;
 
 /**
  *
- * @author jyrki
+ * @author solja
  */
 public class Checkpoint2 {
 
@@ -27,7 +27,7 @@ public class Checkpoint2 {
     }
     
     static void abstracts(){
-        /*
+
         Movie m=new Movie("Gone with the Wind",221); // Name and duration in minutes
         Series s=new Series("Dallas",357); // Name and number of episodes
         // Implement TvBase that will be base-class for both of above classes
@@ -35,37 +35,44 @@ public class Checkpoint2 {
         // duration string must be queried from the concrete classes
         m.print(); // Gone with the Wind, duration 221 minutes
         s.print(); // Dallas, 357 episodes
-        */
+
     }
 
     /*
     Implement Priced-interface and Cheese and Juice classes so
     that two methods below begin to work
     */
-    /*
+
     static void testInterfaces(Priced p){
         System.out.println("Price: "+p.getPrice());
         System.out.println("Name: "+p.getName()); 
     }
-    */
+
     
     static void interfaces(){
-        /*
         Juice j=new Juice("Appelsiinimehu",12.4); // Name and price
         Cheese c=new Cheese("Emmental",5.34);
         testInterfaces(j);
         testInterfaces(c);
         // Make also the following work:
-        testInterfaces(() -> 10.4); // Should print Price: 10.4, Name: Default
+         testInterfaces(() -> 10.4); // Should print Price: 10.4, Name: Default
         // Also pass an instance of an anonymous class to testInterfaces
         // It should print out Price:54.32, Name: Anonymous
-        */
+        
+        testInterfaces (new Priced() {
+            public double getPrice() {
+                return 54.32;
+            }
+            public String getName() {
+                return "Anonymous";
+            }
+        });        
     }
     
     /*
     Implement the two classes needed for following two functions to work as described
     */
-    /*
+
     static void testInheritance(Book b){
         String t=b.getTitle();  // Hobbit or Encyclopedia Britannica
         System.out.println("Printing "+t);
@@ -73,17 +80,14 @@ public class Checkpoint2 {
         // Either: "In a hole in the ground there lived a hobbit"
         // Or: "Encyclopedia britannica has 32640 pages
     }
-    */
     
     static void inheritance(){
-        /*
         Book b=new Book("Hobbit");
         Encyclopedia e=new Encyclopedia(32640); 
         System.out.println(b);  // Hobbit
         System.out.println(e); // Huge book
         testInheritance(b);
         testInheritance(e);
-        */
     }
     
     public static void main(String[] args) {

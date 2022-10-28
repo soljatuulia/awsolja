@@ -10,17 +10,11 @@ import java.util.ArrayList;
  *
  * @author jyrki
  */
-public class PrinterPool {
-    private ArrayList<Printer> printers=new ArrayList<>();
+public class PrinterPool extends MediaList<Printer> {
+
+    @Override
+    public String getAll(Printer med) {
+        return med.toString();
+    }    
     
-    public void add(Printer p){
-        printers.add(p);
-    }
-    
-    public void showPool(){
-        System.out.println("Printers");
-        for(Printer p: printers){
-            System.out.println(p);
-        }
-    }
 }
