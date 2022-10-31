@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import net.virkkunen.techniques.interfaces.Person;
@@ -57,14 +59,14 @@ public class CollectionsTest {
         
         // Tee sama kuin yllä lambdalla
 
-        ArrayList<Person> greaterThan = persons.stream()
+        // ArrayList<Person> greaterThan = persons.stream()
                 
                 
     }
     
     public static void mapTests() {
         
-        HashMap<String, Person> people = new HashMap<String, Person>();
+        Map<String, Person> people = new HashMap<String, Person>();
         Person p1 = new Person();
         Person p2 = new Person();
         Person p3 = new Person();
@@ -81,6 +83,15 @@ public class CollectionsTest {
             System.out.println("Nimi on " + people.get(key).getName() + " ja hetu " + key);
         }
         
+        for (Entry<String, Person> pe:people.entrySet()) {
+            System.out.println(pe.getKey() + " ==> " + pe.getValue().getName());
+        }
+        
+        for (Person p : people.values()) {
+            System.out.println(p.getName());
+        }
+
+       
         HashMap<Integer, Integer> numbers = new HashMap<Integer, Integer>();
         
         for (int i = 0; i < 1000; i++) {
@@ -89,9 +100,9 @@ public class CollectionsTest {
             numbers.put(key, counter + 1);
         }
         
-        for(int i : numbers.keySet()) {
-            System.out.println("Luku " + ??? + " arvottiin " + ?? + " kertaa"); // ks. Jyrkin koodi
-        }
+//        for(int i : numbers.keySet()) {
+//            System.out.println("Luku " + ??? + " arvottiin " + ?? + " kertaa"); // ks. Jyrkin koodi
+//        }
 
     }
     
@@ -127,3 +138,32 @@ public class CollectionsTest {
     
     
 }
+
+        /*
+        Use map to create stream of strings (the names of Persons)
+        And only display those
+        */
+        /*
+        Find the oldest person-worker
+        Which stream-function to use???      
+        */
+        /*
+        Find the age of the oldest Person
+        Now use map and max
+        */
+        /*
+        You should have a Company-class
+        Add field ArrayList<Person>  employees (may be public)
+
+        Create couple Company-objects and place couple Persons on their employees-list
+        Place the Company-objects into an ArrayList
+        Study Stream’s flatMap-method
+        How do you print all the employees of both companies?
+        */
+        /*
+        Study IntStream
+        Generate 1000 random integers (1-100) into a List of integers
+        And from that stream create a HashMap as we did earlier
+        Value (1-100) is the key to the data
+        The actual data behind the key is counter, how many times that value is generated
+        */
