@@ -108,4 +108,8 @@ public class PassangersAndCars {
     public void setDeploymentDate(Date deploymentDate) {
         this.deploymentDate = deploymentDate;
     }
+    
+    public String toString() {
+        return make+","+name+","+passangerType;
+    }
 }

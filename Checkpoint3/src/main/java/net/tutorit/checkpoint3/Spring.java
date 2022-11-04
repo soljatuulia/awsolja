@@ -29,8 +29,8 @@ public class Spring {
     
     public Car getCarOf(int passangerId){
         // Palauta kyseisen matkustajan auto
-        return prep.findCar(passangerId);      
-        //return new Car();
+        return prep.findCar(passangerId);
+             //return new Car();
     }
     
     public void listAllPeople(){
@@ -52,10 +52,10 @@ public class Spring {
         Passanger p=new Passanger("Alfred",null,"ihminen");
         addPassanger(p);
         System.out.println("Lisättiin: "+p);
-        //listAllPeople();
-        //Car c=getCarOf(10);
-        //System.out.println("Matkustajan 10 auto on "+c.getMake());
-        //listEverything();
+        listAllPeople();
+        Car c=getCarOf(10);
+        System.out.println("Matkustajan 10 auto on "+c.getMake());
+        listEverything();
     }
 }
 /*

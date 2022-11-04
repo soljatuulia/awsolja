@@ -19,7 +19,11 @@ public class Car {
     private Date deploymentDate; //deploymentdate
     
     public String getMake(){
-        return "vielä vähän kesken";
+        if (make==null) {
+            return "ei ajoneuvoa";
+        } else {
+            return make;
+        }
     }
 
     /**

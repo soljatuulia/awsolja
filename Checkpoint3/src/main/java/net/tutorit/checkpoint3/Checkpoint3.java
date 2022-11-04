@@ -38,7 +38,7 @@ public class Checkpoint3 {
         return args -> {
             System.out.println("Sovellus on käynnistynyt");
             populate.init();
-            //jdbc.jdbcMain();
+            jdbc.jdbcMain();
             spring.springMain();
             System.out.println("Kopioi sovelluksen tulosteet vastaukseksi Canvakseen sekä vie projekti omaan GitHub-repositoryysi");
         };
