@@ -91,14 +91,20 @@ public class BookDAO {
         // prepared statement
         try {
             Connection con = getConnection();
-            String sql = "INSERT INTO book (title) VALUES (?)";
+            String sql = "INSERT INTO book (author_id, title) VALUES (?, ?)";
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, b.getTitle());
+            stm.setInt(1, b.getAuthorId());
+            stm.setString(2, b.getTitle());
             int rowsAffected = stm.executeUpdate(); // päivitetään!
             ResultSet keys = stm.getGeneratedKeys(); // kysytään erikseen, mitä kaikkia primary keyta lisättiin
             if (keys.next()) {
-                
+                int id = keys.getInt(1);
+                stm.close();
+                keys.close();
+                con.close();
             }
+            stm.close();
+            con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -106,6 +112,27 @@ public class BookDAO {
     }
     
     public Book update(Book b) {
+        try {
+            Connection con = getConnection();
+            String sql = "SELECT from author where id=?";
+            PreparedStatement stm = con.prepareStatement(sql,ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE);
+            stm.setInt(1, b.getId());
+            ResultSet rs = stm.executeQuery();
+            Book bret = null;
+            if (rs.next()) {
+                rs.updateInt("author_id", b.getAuthorId());
+                rs.updateString("title", b.getTitle());
+                rs.updateRow();
+                bret = bookFromResultSet(rs);
+            }
+            rs.close();
+            stm.close();
+            con.close();
+            return bret;
+  
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }      
         return null;
     }
     
