@@ -1,0 +1,26 @@
+﻿XML
+
+"Prologi" on pakollinen, ja yksilöllinen juurielementti
+<?xml version="1.0" charset="UTF-8">
+<PersonList>
+	<Person id="1" name="Jyrki">
+		<Phone>23423432</Phone>
+		<Age></Age>
+	</Person>
+	<Person id="2" name="Jussi">
+		<Phone>23423432</Phone>
+		<Age />
+	</Person>
+</PersonList>
+
+JSON
+JavaScript Object Notation
+[
+  {"Name":"Jyrki","Phone":"123213","Age":14,"IsMale":true},
+  {"Name":"Jyrki","Phone":"123213","Age":14,"IsMale":true}
+]
+
+CSV
+Name;Phone;Age
+"Jyrki";"234324";34
+"Jussi";"23432234";12

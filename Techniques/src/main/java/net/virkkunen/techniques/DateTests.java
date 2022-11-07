@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package net.virkkunen.techniques.dates;
+package net.virkkunen.techniques;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -28,6 +28,11 @@ import java.util.Scanner;
  * @author Solja
  */
 public class DateTests {
+    
+    public static void datesRecap(){
+        LocalDateTime xMinutesLater = LocalDateTime.now().plusMinutes(70);
+        System.out.println(xMinutesLater);
+    }
     
     public static void differentOffices(){
                 // Zoneddate -luokat
