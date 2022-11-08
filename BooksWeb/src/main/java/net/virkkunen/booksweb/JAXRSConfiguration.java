@@ -18,7 +18,7 @@ package net.virkkunen.booksweb;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
-@ApplicationPath("/api")
+@ApplicationPath("/services") // = urlin eka osuus, joka sovelluksen perässä
 public class JAXRSConfiguration extends Application {
 
 }
