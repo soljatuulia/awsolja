@@ -27,6 +27,30 @@ public class Collections {
     persons.add(new Person(4,"Pate"));
     persons.add(new Person(5,"Ritu"));
     }
+ 
+    // MAP-toteutus!    
+    public static void onlyNames() {
+        persons.stream()
+                .map(p -> p.getName())
+                .distinct()
+                .sorted()
+                .forEach(name -> System.out.println(name));
+    }
+    
+    public static void maxId() {
+//        int maxId=persons.stream()
+//                        .sorted((a,b) -> b.getId()-a.getId())
+//                        .findFirst().orElse(new Person())
+//                        .getId();
+//        System.out.println("Largest "+maxId);        
+        int maxId=persons.stream()
+                    .mapToInt(p -> p.getId())
+                    .max()
+                    .getAsInt();
+        System.out.println("Largest Id 2 "+maxId);   
+        //return maxId;
+    }
+   
     
     public static void findPerson(int id) {
         Person pf=persons
@@ -39,9 +63,9 @@ public class Collections {
     }
 
     public static List<Person> nameContains(String str) {
-        Stream<Person> ps=persons.stream();
+        //Stream<Person> ps=persons.stream();
 
-        List<Person> pl=ps //otetaan talteen ps ja kutsutaan sitten filtteriä
+        List<Person> pl=persons.stream() //otetaan talteen ps ja kutsutaan sitten filtteriä
                         .filter(p -> p.getName() // palauttaa streamin, jolle tehdään tämä toiminto
                         .contains(str)) // palauttaa jälleen uuden streamin, jolle tehdään toimint0
                         .collect(Collectors.toList()); // jne.
@@ -64,26 +88,16 @@ public class Collections {
         
         return pl;
     }    
-    
-    public static void onlyNames() {
-        persons.stream()
-                .map(henkilo -> henkilo.getName())
-                .distinct()
-                .sorted()
-                .forEach(nimi -> System.out.println(nimi));
-    }
-    
-    public static void longestName() {
-//        Person p=persons.stream()
-//            .sorted((s1,s2)->Integer.compare(s2.getName().length(),s1.getName().length()))
-//            .findFirst()
-//            .get();
-//                
-//       System.out.println(p.getName());
 
-        String longest = sortedList.stream()
-                                max.
-                                        }                                    
+    
+    public static Person longestName() {
+        Person p=persons.stream()
+            .sorted((s1,s2)->Integer.compare(s2.getName().length(),s1.getName().length()))
+            .findFirst()
+            .get();
+        
+        return p;
+    }
 
     public static Person findLongest() {
         
@@ -101,5 +115,30 @@ public class Collections {
                 
        System.out.println(p);
         
-    }    
+    }  
+    
+    public static String findBiggestId() {
+//        Person ps = persons.stream()
+//                        .max(Comparator.comparingInt(p -> p.getId())).get();
+//        
+//        return ps;
+
+//        List<String> names=persons.stream()
+//                                    .map(p -> p.getName())
+//                                    .collect(Collectors.toList());
+//        names.stream().sorted((a,b) -> b.getId()-a.getId()).findFirst().orElse(new Person()).getId();
+//        //System.out.println("Biggest id: "+bId);       
+//        return names;
+    }
+    /*
+    JYRKILTÄ! MAP OLEELLINEN:
+    List<String> names = persons.stream().map(p -> getName().collect(Collectors.toList())) //tähän jotain?//
+    names.stream().forEach(System.out::println);
+    String nl=names.stream().collect(Collectors.joining(","));
+    System.out.println(nl);
+    
+    String longest=persons.stream().map(p -> p.getName()).max((a,b) -> a.length()-b.length()).orElse("");
+    System.out.println("Longest:"+longest);    
+    
+*/
 }

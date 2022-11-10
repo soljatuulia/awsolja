@@ -5,7 +5,7 @@
 
 package net.virkkunen.at1practice;
 
-import static net.virkkunen.at1practice.Collections.biggestId;
+import static net.virkkunen.at1practice.Collections.maxId;
 import static net.virkkunen.at1practice.Dates.dateTimeTests;
 
 /**
@@ -16,6 +16,6 @@ public class AT1Practice {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        biggestId();
+        maxId();
     }
 }

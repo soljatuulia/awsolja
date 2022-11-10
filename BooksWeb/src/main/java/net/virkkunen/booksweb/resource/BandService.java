@@ -2,135 +2,151 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package net.virkkunen.at1practiceweb.resource;
+package net.virkkunen.booksweb.resource;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import net.virkkunen.at1practiceweb.entities.ErrorInfo;
-import net.virkkunen.at1practiceweb.entities.Person;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import net.virkkunen.booksweb.entities.Band;
+import net.virkkunen.booksweb.entities.ErrorInfo;
+
 
 /**
  *
  * @author Solja
  */
-@Path("person")
-public class PersonService {
+@Path("band")
+public class BandService {
     
-    //henkilöt tänne staattiseen listaan
-    //muihin paitsi ekaan gettiin poikkeuskäsittely
-    
-    static ArrayList<Person> persons = new ArrayList<>();
+    static ArrayList<Band> bands = new ArrayList<>();
     
     static {
-        persons.add(new Person(1,"Kirsi"));
-        persons.add(new Person(2,"Kike"));
-        persons.add(new Person(3,"Hane"));
-        persons.add(new Person(4,"Kikka"));
-        persons.add(new Person(5,"Lulu"));
+        bands.add(new Band(1,"Sigur Rós"));
+        bands.add(new Band(2,"Dungen"));
+        bands.add(new Band(3,"HAIM"));
+        bands.add(new Band(4,"Ultra Bra"));
+        bands.add(new Band(5,"Fleet Foxes"));
     }
     
     @GET
     @Produces({"application/json","application/xml"})    
-    public List<Person> getAll(@QueryParam("sort") @DefaultValue("name") String sort, @QueryParam) {
-        return persons;
+    public List<Band> getBands(@QueryParam("sort") @DefaultValue("id") String sort,
+            @QueryParam("filter") @DefaultValue("") String filter) {        
+        Stream<Band> bs = bands.stream();
+        
+        if (sort.equals("id")) {
+            bs.sorted((a,b) -> a.getId()-b.getId());
+        } else {
+            bs = bs.sorted((a,b) -> a.getName().compareTo(b.getName()));
+        }
+        
+        List<Band> bl = bs.filter(b -> b.getName()
+                            .contains(filter))
+                            .collect(Collectors.toList());
+        
+        return bl;
+        // return persons;
     }
     
     @GET
     @Produces("application/json")
     @Path("{id}")
-    public Response getPerson(@PathParam("id") int id) {
-        Person pf=persons
+    public Response getBand(@PathParam("id") int id) {
+        Band bf=bands
                 .stream()
                 .filter(p -> p.getId()==id) //kysytään kyseisen Personin id, jonka täsmättävä(==) parametrin id:hen
                 .findFirst() // antaa listan nykyisestä järjestyksestä ensimmäisen kriteerit täyttävän alkion. jos löytyy, käytetään.
                 .orElse(null); 
 
-        if (pf==null) {
+        if (bf==null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ErrorInfo(0,"Ei löydy"))
                     .build();
         }
         
-        return Response.ok(pf).build();        
+        return Response.ok(bf).build();        
     }
     
     @PUT
     @Produces("application/json")
-    public Response addPerson(Person p) {
-        if (p.getName().equals("")) {
+    public Response addBand(Band ba) {
+        if (ba.getName().equals("")) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(new ErrorInfo(0,"Nimi ei voi olla tyhjä"))
                     .build();
         }
         
-        Optional<Person> person = persons.stream()
-                                        .max((a,b) -> a.getId()-b.getId());
+        Optional<Band> band = bands.stream()
+                                    .max((a,b) -> a.getId()-b.getId());
         
         
         int newId = 1;
         
-        if (person.isPresent()) {
-            newId = person.get().getId() + 1;
+        if (band.isPresent()) {
+            newId = band.get().getId() + 1;
         }
         
-        p.setId(newId);
-        persons.add(p);
+        ba.setId(newId);
+        bands.add(ba);
         
-        return Response.ok(p).build();
+        return Response.ok(ba).build();
     }
     
     @POST
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{id}")
-    public Response editPerson(@PathParam("id") int id, Person p) {
-        if (p.getName().equals("")) {
+    public Response editBand(@PathParam("id") int id, Band ba) {
+        if (ba.getName().equals("")) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(new ErrorInfo(id,"Nimi ei voi olla tyhjä"))
                     .build();
         }
 
-        if (p.getId() != id) {
+        if (ba.getId() != id) {
             return Response.status(Response.Status.BAD_REQUEST)
                             .entity(new ErrorInfo(id,"Väärä id"))
                             .build();            
         }
         
-        Person per = persons.stream()
+        Band band = bands.stream()
                             .filter(px -> px.getId() == id)
                             .findFirst()
                             .orElse(null);
         
-        if (per == null) {
+        if (band == null) {
             return Response.status(Response.Status.NOT_FOUND)
                             .entity(new ErrorInfo(id,"Ei löydy"))
                             .build();
         }
         
-        per.setName(p.getName());
-        return Response.ok(per).build();
+        band.setName(ba.getName());
+        return Response.ok(band).build();
     }
     
     @DELETE
     @Produces("application/json")
     @Path("{id}")
-    public Response deletePerson(@PathParam("id") int id) {
-        Person per = persons.stream()
+    public Response deleteBand(@PathParam("id") int id) {
+        Band band = bands.stream()
                             .filter(px -> px.getId() == id)
                             .findFirst()
                             .orElse(null);
         
-        if (per == null) {
+        if (band == null) {
             return Response.status(Response.Status.NOT_FOUND)
                             .entity(new ErrorInfo(id,"Ei löydy"))
                             .build();            

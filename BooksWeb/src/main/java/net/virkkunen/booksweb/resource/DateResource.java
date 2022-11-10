@@ -24,7 +24,7 @@ public class DateResource {
     
     
     @GET
-    @Produces("text/plain") // urlin perässä +-merkin jälkeen ?year=2022&month=12Date
+    @Produces("text/plain") // urlin perässä +-merkin jälkeen ?year=2022&month=12
     public String getDate(@QueryParam("year") @DefaultValue("2022") int y,
                           @QueryParam("month") @DefaultValue("1") int m,
                           @QueryParam("day") @DefaultValue("1") int d) {

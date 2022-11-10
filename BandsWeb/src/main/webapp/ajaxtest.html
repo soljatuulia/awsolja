@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var servicesRoot="/BandsWeb/api/author";
+            
+            function makeTheCall(url,method,data,cb){ // lisätty callback(cb)
+                if (!method) method="GET";
+                var x=new XMLHttpRequest();
+                x.onreadystatechange=function(){
+                    if (x.readyState==4) cb(x.responseText); //saatu tietää, että vastaus tullut
+                }
+                    x.open(method,url,true);
+                    x.setRequestHeader("Content-Type","application/json");
+                    x.setRequestHeader("Accept","application/json");
+                    x.send(data);
+            }
+            
+            window.onload=function(){
+                makeTheCall("/BandsWeb/api/author","get",null,function(resp) {
+                    console.log(resp);
+                    let.ar=JSON.parse(resp);
+                });
+            }            
+        </script>   
+    </head>
+    <body>
+        <h1>Authors</h1>
+        <table>
+            <thead>
+                <tr><th>id</th><th>First name</th><th>Last name</th></tr>
+            </thead>
+            <tbody id="authorTable">
+                
+            </tbody>
+        </table>
+    </body>
+</html>
