@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import net.virkkunen.booksweb.entities.ErrorInfo;
 import net.virkkunen.booksweb.entities.Person;
 
 /**
@@ -47,7 +48,7 @@ public class PersonService {
     public List<Person> getPersons(@QueryParam("sort") @DefaultValue("id") String sort,
             @QueryParam("filter") @DefaultValue("") String filter) {
         Stream<Person> ps=persons.stream(); // luodaan streamista uusi lista
-        
+                
         if (sort.equals("id")) {
             ps.sorted((a,b) -> a.getId()-b.getId());
         } else {
@@ -55,9 +56,9 @@ public class PersonService {
         } // kun tiedetään, kumpaa kutsutaan
         
         List<Person> pl=ps //otetaan talteen ps ja kutsutaan sitten filtteriä
-                        .filter(p -> p.getName()
-                        .contains(filter))
-                        .collect(Collectors.toList());
+                        .filter(p -> p.getName() // palauttaa streamin, jolle tehdään tämä toiminto
+                        .contains(filter)) // palauttaa jälleen uuden streamin, jolle tehdään toimint0
+                        .collect(Collectors.toList()); // jne.
         
         return pl;
 // alkujaan vain: return persons;
@@ -71,12 +72,14 @@ public class PersonService {
         // annettava not found, jos ei löydy        
         Person pf=persons
                 .stream()
-                .filter(p -> p.getId()==id)
-                .findFirst()
-                .orElse(null);
+                .filter(p -> p.getId()==id) //kysytään kyseisen Personin id, jonka täsmättävä(==) parametrin id:hen
+                .findFirst() // antaa listan nykyisestä järjestyksestä ensimmäisen kriteerit täyttävän alkion. jos löytyy, käytetään.
+                .orElse(null); // jos ei, palautetaan null
         
         if (pf==null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ErrorInfo(id,"Ei löydy"))
+                    .build();
         }
         
         return Response.ok(pf).build();
@@ -88,9 +91,12 @@ public class PersonService {
     public Response createPerson(Person p){
         //virhe, jos nimi tyhjä
         if (p.getName().equals("")) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                            .entity(new ErrorInfo(0,"Nimi ei voi olla tyhjä"))
+                            .build();
         }     
         
+        // luodaan uusi id:
         Optional<Person> pf = persons // Optional siltä varalta, että maksimia ei löydy
                                 .stream()
                                 .max((a,b) -> a.getId()-b.getId());
@@ -112,10 +118,14 @@ public class PersonService {
     public Response savePerson(@PathParam("id") int id, Person p) {
         //virhe, jos nimi tyhjä tai jos id!=p.id tai jos ei löydy
         if (p.getName().equals("")) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                            .entity(new ErrorInfo(id,"Nimi ei voi olla tyhjä"))
+                            .build();
         }
         if (id!=p.getId()) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                            .entity(new ErrorInfo(id,"ID Mismatch"))
+                            .build();
         }
         
         Person pf=persons
@@ -125,7 +135,9 @@ public class PersonService {
                 .orElse(null);
         
         if (pf==null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                            .entity(new ErrorInfo(id,"Ei löydy"))
+                            .build();
         }
         
         pf.setName(p.getName());
@@ -135,8 +147,19 @@ public class PersonService {
     @DELETE
     @Produces("application/json")
     @Path("{id}")
-    public void deletePerson(@PathParam("id") int id) {
+    public Response deletePerson(@PathParam("id") int id) {
+        Person pf = persons.stream()
+                            .filter(px -> px.getId()==id)
+                            .findFirst()
+                            .orElse(null);
         
+        if (pf==null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                            .entity(new ErrorInfo(id,"Ei löydy"))
+                            .build();
+        }
+        
+        return Response.ok(new ErrorInfo(0,"Onnistui")).build();
     }
     
     
