@@ -26,16 +26,6 @@ import net.tutorit.assessment1.entities.ErrorInfo;
  */
 @Path("dates")
 public class DatesService {
-    /*
-    Toteuta palvelu osoitteeseen /api/dates/{date}, 
-    jossa {date} on muotoa 2020-10-21. Palvelu vastaa get-menetelmällä tulleeseen pyyntöön
-    
-    Palvelun tulee myös hyväksyä QueryParam "plusdays" ja palauttaa parametrina tullut päiväys, 
-    johon on lisätty plusdays-parametrin osoittama määrä päiviä.
-
-    Palauta päivämäärä merkkijonona (text/plain) ,
-    joka on muotoiltu kuten alkuperäinen päivämäärä.
-    */
     
     @GET
     @Produces("text/plain")
@@ -71,7 +61,6 @@ public class DatesService {
      
     @POST
     @Produces("text/plain")
-    @Consumes("text/plain")
     @Path("meeting")       
     public String localDate(@QueryParam("loc") @DefaultValue("Europe/Helsinki") String locale, 
                           @QueryParam("hours") @DefaultValue("1") int h, 
