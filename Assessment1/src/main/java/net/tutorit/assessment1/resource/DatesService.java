@@ -4,6 +4,7 @@
  */
 package net.tutorit.assessment1.resource;
 
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -42,33 +43,42 @@ public class DatesService {
     public Response getDate(@PathParam("date") String date){
         if (date.isEmpty()) return Response.status(Response.Status.BAD_REQUEST)
                                     .entity(new ErrorInfo(400,"Empty date")).build();
-        DateTimeFormatter formatter1=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate1 = LocalDate.parse(date, formatter1);
+        
+        String dateString1 = date;
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate1 = LocalDate.parse(dateString1, formatter1);
 
         return Response.ok((localDate1).toString()).build();
     }
 
     @GET
     @Produces("text/plain")
-    @Path("{date}/{plusdays}")    
-    public String datePlusDays(@QueryParam("date") @DefaultValue("2020-10-21") String date, 
-                          @QueryParam("plusdays")@DefaultValue("1") int d){
-        if (d<0) throw new WebApplicationException("Liian vähän päiviä",Response.Status.BAD_REQUEST);
-        
-        DateTimeFormatter formatter1=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate1 = LocalDate.parse(date, formatter1);  
-        
-        return localDate1.plusDays(d).toString();
-    }
+    @Path("{date}")
+    public String datePlusDays(@PathParam("date") String date, 
+                          @QueryParam("plusdays") @DefaultValue("1") int d){
+        if (d < 0) {
+            throw new WebApplicationException("Ei voi vähentää päiviä",Response.Status.BAD_REQUEST);
+        }
     
+        String dateString1 = date;
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate1 = LocalDate.parse(dateString1, formatter1);  
+        
+        LocalDate localDate2 = localDate1.plusDays(d);
+        
+        return localDate2.toString();
+    }
+     
     @POST
     @Produces("text/plain")
-    @Path("meeting/{loc}/{hours}")       
+    @Consumes("text/plain")
+    @Path("meeting")       
     public String localDate(@QueryParam("loc") @DefaultValue("Europe/Helsinki") String locale, 
-                          @QueryParam("hours")@DefaultValue("1") int h, 
+                          @QueryParam("hours") @DefaultValue("1") int h, 
                           String date) {
+        String str = date; 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"); 
-        LocalDateTime dateTime1 = LocalDateTime.parse(date,formatter);
+        LocalDateTime dateTime1 = LocalDateTime.parse(str,formatter);
 
         ZoneId localZone = ZoneId.of(locale);  
         
@@ -79,29 +89,5 @@ public class DatesService {
         
         return newDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).toString();
     }
-
-    /*
-    Toteuta palvelu osoitteeseen /api/dates/meeting, joka vastaa POST-menetelmällä tulleeseen pyyntöön.
-
-Pyynnön body:ssä tulee päivämäärä ja kellonaika muotoiltuna esim: 2020-11-02T13:12:19 (text/plain)
-
-Lisäksi palvelu saa query-parametrit loc ja hours.
-
-hours-parametri kertoo kuinka monella tunnilla päivämäärä/kellonaikaa tulee ensin kasvattaa
-
-Loc parametrilla voi olla yksi seuraavista arvoista: jp,fi,us. 
-    Kyseisestä arvosta voit päätellä aikavyöhykkeen Asia/Tokyo,Europe/Helsinki tai America/New_York.
-
-Ajattele, että päiväys on lähetetty kyseiseltä aikavyöhykkeeltä. 
-    Sinun tulee palauttaa päiväys/kellonaika siten että se vastaa kellonaikaa Suomessa.
-
-Jos siis saat Japanista kellonajan 12:00, niin palautat Suomen kellonajan, 
-    joka on 7h vähemmän mutta lisättynä hour-parametrin määrällä. 
-    Vastaavasti jos saat kellonajan USA:sta, palautat kellonajan, joka on selkeästi enemmän. 
-    Käytä laskennassa ZonedDateTime-luokkaa.
-
-Palauta päiväystä ja kellonaikaa kuvaava merkkijono samalla tapaa muotoiltuna, 
-    kuin alkuperäinen päiväys/kellonaika (text/plain).
-    */
-    
+       
 }

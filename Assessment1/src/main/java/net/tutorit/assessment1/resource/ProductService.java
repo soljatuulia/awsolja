@@ -7,6 +7,7 @@ package net.tutorit.assessment1.resource;
 import jakarta.annotation.Resource;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,13 +22,30 @@ import net.tutorit.assessment1.entities.Product;
  */
 @Path("products")
 public class ProductService {
+    @Resource(lookup="jdbc/books")
+    private DataSource myds;
+    /*
+    Sinun täytyy saada tietoantayhteys muodostettua, 
+    jotta getAll-metodi voi palauttaa products-taulukosta löytyvät tuotteet.
+    */
     
     @GET
+    @Produces("application/json")    
     public List<Product> getAll(){
         ArrayList<Product> pl=new ArrayList<>();
         try{
             // Tähän tietokantahaku ja vastauksen antaminen
             // Product-luokan lopusta löytyvä staattinen metodi saattaa auttaa....
+            Connection con = myds.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM product");
+            while(rs.next()){
+                Product p = Product.fromResultSet(rs);
+                pl.add(p);
+            }
+            rs.close();
+            stm.close();
+            con.close();
         }
         catch(Exception ex){
             System.out.println("***********************Virhe");
