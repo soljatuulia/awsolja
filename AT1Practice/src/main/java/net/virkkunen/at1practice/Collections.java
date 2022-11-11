@@ -37,6 +37,7 @@ public class Collections {
                 .forEach(name -> System.out.println(name));
     }
     
+    
     public static void maxId() {
 //        int maxId=persons.stream()
 //                        .sorted((a,b) -> b.getId()-a.getId())

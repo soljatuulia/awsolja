@@ -1,0 +1,7 @@
+net\tutorit\assessment1\entities\Painting.class
+net\tutorit\assessment1\entities\Product.class
+net\tutorit\assessment1\resource\PaintingResource.class
+net\tutorit\assessment1\servlet\ReportingServlet.class
+net\tutorit\assessment1\JAXRSConfiguration.class
+net\tutorit\assessment1\resource\ProductService.class
+net\tutorit\assessment1\ejb\DBCreator.class

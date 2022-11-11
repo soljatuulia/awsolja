@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assessment test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href="styles/test.css" rel="stylesheet" />
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/testm.js"></script>
+        <script src="scripts/testrunner.js"></script>
+    </head>
+    <body>
+        <div class="container">
+        <header>
+            <h1>Assessment test</h1>
+        </header>
+        <main>
+            <aside>
+                <h2>Tehtävät</h2>
+            </aside>
+            <article>
+                <section id="ex1" style="display:none">
+                    <h2>1. Päivämäärä</h2>
+                        <p>Toteuta palvelu osoitteeseen /api/dates/{date}, jossa 
+                            {date} on muotoa 2020-10-21. Palvelu vastaa get-menetelmällä tulleeseen pyyntöön</p>
+                        <p>Palvelun tulee myös hyväksyä QueryParam "plusdays" ja palauttaa
+                            parametrina tullut päiväys, johon on lisätty plusdays-parametrin
+                            osoittama määrä päiviä.</p>
+                        <p>Palauta päivämäärä merkkijonona (text/plain) ,joka on muotoiltu kuten alkuperäinen päivämäärä.</p>
+                </section>
+                <section id="ex2" style="display:none">
+                    <h2>2. Päiväys ja kellonaika</h2>
+                    <p>Toteuta palvelu osoitteeseen /api/dates/meeting, joka vastaa POST-menetelmällä tulleeseen pyyntöön.</p>
+                    <p>Pyynnön body:ssä tulee päivämäärä ja kellonaika muotoiltuna esim: 2020-11-02T13:12:19 (text/plain)</p>
+                    <p>Lisäksi palvelu saa query-parametrit loc ja hours.</p>
+                    <p>hours-parametri kertoo kuinka monella tunnilla päivämäärä/kellonaikaa tulee ensin kasvattaa</p>
+                    <p>Loc parametrilla voi olla yksi seuraavista arvoista: jp,fi,us.
+                        Kyseisestä arvosta voit päätellä aikavyöhykkeen Asia/Tokyo,Europe/Helsinki
+                        tai America/New_York.</p>
+                    <p>Ajattele, että päiväys on lähetetty kyseiseltä aikavyöhykkeeltä. Sinun tulee
+                        palauttaa päiväys/kellonaika siten että se vastaa kellonaikaa Suomessa.</p>
+                    <p>Jos siis saat Japanista kellonajan 12:00, niin palautat Suomen kellonajan, joka 
+                        on 7h vähemmän mutta lisättynä hour-parametrin määrällä. Vastaavasti jos saat kellonajan USA:sta, palautat kellonajan,
+                        joka on selkeästi enemmän. Käytä laskennassa ZonedDateTime-luokkaa.</p>
+                    <p>Palauta päiväystä ja kellonaikaa kuvaava merkkijono samalla tapaa muotoiltuna,
+                        kuin alkuperäinen päiväys/kellonaika (text/plain).</p>
+                </section>
+                <section id="ex3" style="display:none">
+                    <h2>3. Hae maalaukset</h2>
+                    <p>Toteuta osoitteeseen /api/paintings -palvelu, joka palauttaa kaikki
+                        maalaukset PaintingResource.java- tiedoston ArrayList:stä json-muotoiltuna.
+                    </p>
+                </section>
+                <section id="ex4" style="display:none">
+                    <h2>4. Hae maalaus</h2>
+                    <p>Toteuta osoitteeseen /api/paintings/{id} palvelu, joka palauttaa
+                        sen maalauksen, jonka id löytyy polkuparametristä, json muotoiltuna.</p>
+                    <p>Mikäli maalausta ei löydy id:n perusteella, tulee antaa http-statuskoodi 404 (not found),
+                        sekä palauttaa json-muotoiltu objekti, jolla on message-ominaisuus ja sillä 
+                        arvo "Not found"</p>
+                </section>
+                <section id="ex5" style="display:none">
+                    <h2>5. Luo maalaus</h2>
+                    <p>Toteuta osoitteeseen /api/paintings palvelu, joka vastaanottaa
+                        uuden maalauksen tiedot post-menetelmällä.</p>
+                    <p>Mikäli maalauksen artisti on tyhjä palauta statuskoodi 400 (bad request),
+                        sekä objekti, jonka message-ominaisuudella on arvo "Wrong info"</p>
+                    <p>Etsi pyynnön bodyssä tulleelle maalaukselle uniikki id, talleta se kokoelmaan 
+                        ja palauta kutsujalle.</p>
+                </section>
+                <section id="ex6" style="display:none">
+                    <h2>6. Muokkaa maalausta</h2>
+                    <p>Toteuta osoitteeseen /api/paintings/{id} palvelu, joka vastaanottaa
+                        muuttuneen maalauksen tiedot put-menetelmällä.</p>
+                    <p>Mikäli maalauksen artisti on tyhjä palauta statuskoodi 400 (bad request),
+                        sekä objekti, jonka message-ominaisuudella on arvo "Wrong info"</p>
+                    <p>Mikäli taulua ei löydy id:n perusteella palauta status 404 (not found)
+                        sekä objekti, jonka message-ominaisuudella on arvo "Not found".</p>
+                    <p>Etsi id:n perusteella listalta maalaus ja päivitä sen tiedot (artisti ja maalauksen nimi)
+                        kutsun mukana tulleelta objektilta.</p>
+                    <p>Palauta sama objekti</p>
+                </section>
+                <section id="ex7" style="display:none">
+                    <h2>7. Poista maalaus</h2>
+                    <p>Toteuta osoitteeseen /api/paintings/{id} palvelu,
+                        joka poistaa taulun id:perusteella.</p>
+                    <p>Mikäli taulua ei löydy, palauta statuskoodi 404 (not found) ja objekti,
+                        jonka message-ominaisuudella on arvo "Not found".</p>
+                    <p>Mikäli taulun saa poistettua, palauta statuskoodi 200 (ok), sekä
+                        objekti, jonka message-ominaisuudella on arvo "Deleted"</p>
+                </section>
+                <section id="ex8" style="display:none">
+                    <h2>8. Sorttaa ja suodata maalaukset</h2>
+                    <p>Palaa tehtävässä 3 toteuttamaasi metodiin. Lisää sille QueryParamit sort ja filter.
+                        Sortin oletusarvona voi olla "artist", filttering tyhjä merkkijono.
+                    </p>
+                    <p>Järjestä vastauksen maalaukset sort-parametrin mukaan. Jos arvo on "artist", niin
+                        taiteilijan nimen mukaiseen järjestykseen, jos arvo jotain muuta niin maalauksen 
+                        nimen mukaiseen järjestykesen.</p>
+                    <p>Filtteröi lisäksi vastaus siten, että joko maalauksen taiteilijasta tai maalauksen
+                    nimestä täytyy löytyä filter-parametrissä annettu merkkijono.</p>
+                </section>
+                <section id="ex9" style="display:none">
+                    <h2>9. Hae tietokannasta</h2>
+                    <p>Työstä ProductService.java:aa.</p>
+                    <p>Sinun täytyy saada tietoantayhteys muodostettua, jotta getAll-metodi 
+                        voi palauttaa products-taulukosta löytyvät tuotteet.</p>
+                </section>
+                <section id="ex10" style="display:none">
+                    <h2>10. Raporttiservlet</h2>
+                    <p>Työstä ReportingServlet -luokkaa</p>
+                    <p>Sen tulisi tehdä tietokantakysely manufacturer- ja product- tauluihin
+                        siten,että listataan kaikki valmistajat ja tuotteet.</p>
+                    <p>Valmistajan täytyy näkyä listauksessa vaikka sillä ei olisi yhtään tuotetta.</p>
+                    <p>Mikäli valmistajalla on useampia tuotteita, tulee jokaisesta oma rivinsä</p>
+                    <p>Tuota vastausjoukosta html-taulukko, jonka sarakeotsikkoina ovat Valmistaja,Tuote ja Hinta</p>
+                    <p>Puuttuvan tiedon voi ilmaista "null"-tekstillä.</p>
+                    <div id="insertTableHere"></div>
+                </section>
+            </article>
+        </main>
+        <footer>
+            <p>Tsemppiä</p>
+        </footer>
+        </div>
+    </body>
+</html>

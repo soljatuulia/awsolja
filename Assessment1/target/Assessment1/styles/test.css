@@ -1,0 +1,89 @@
+html,body,div,p{
+    margin:0;
+    padding:0;
+}
+
+body,div,p,input,textarea{
+    font-family: 'Open sans',sans-serif;
+    font-size: 12pt;
+}
+
+p{
+    margin-bottom: 5px;
+}
+
+header{
+    padding: 5px 0;
+    border-bottom: 1px solid #204080;
+    margin-bottom: 20px;
+}
+
+header h1{
+    margin:0;
+    padding:0;
+}
+
+footer {
+    padding: 10px 0;
+    border-top: 1px solid #204080;
+    margin-top: 20px;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 300px auto;
+    column-gap: 10px;
+    min-height: 400px;
+}
+
+.indicator{
+    width:12px;
+    height:12px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius:5px;
+    display: inline-block;
+    margin-right: 5px;    
+}
+
+.failed{
+    background-color: red;
+}
+
+.success{
+    background-color: green;
+}
+    
+iframe{
+    width: 100%;
+    min-height: 200px;
+}
+
+input.answer{
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom: 1px solid #a0a0a0;   
+    background-color: white;
+    text-align: center;
+}
+
+input.answer:focus{
+    outline: none;
+}
+
+aside div{
+    cursor: pointer;
+}
+
+.runTestDiv{
+    margin:10px 0;
+    border: 1px solid #a0a0a0;
+    border-radius: 5px;
+    padding: 5px;
+}
