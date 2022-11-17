@@ -24,7 +24,7 @@ public class DBCreator {
     private DataSource myds;
 
 
-    @PostConstruct
+    @PostConstruct // kertoo, että heti kun sovellus liipasoitu käyntiin, tehtävä taulut
     public void init(){
         try{
             Connection con=myds.getConnection();

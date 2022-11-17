@@ -41,23 +41,23 @@ public class DatesService {
         return Response.ok((localDate1).toString()).build();
     }
 
-    @GET
-    @Produces("text/plain")
-    @Path("{date}")
-    public String datePlusDays(@PathParam("date") String date, 
-                          @QueryParam("plusdays") @DefaultValue("1") int d){
-        if (d < 0) {
-            throw new WebApplicationException("Ei voi vähentää päiviä",Response.Status.BAD_REQUEST);
-        }
-    
-        String dateString1 = date;
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate1 = LocalDate.parse(dateString1, formatter1);  
-        
-        LocalDate localDate2 = localDate1.plusDays(d);
-        
-        return localDate2.toString();
-    }
+//    @GET
+//    @Produces("text/plain")
+//    @Path("{date}")
+//    public String datePlusDays(@PathParam("date") String date, 
+//                          @QueryParam("plusdays") @DefaultValue("1") int d){
+//        if (d < 0) {
+//            throw new WebApplicationException("Ei voi vähentää päiviä",Response.Status.BAD_REQUEST);
+//        }
+//    
+//        String dateString1 = date;
+//        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate localDate1 = LocalDate.parse(dateString1, formatter1);  
+//        
+//        LocalDate localDate2 = localDate1.plusDays(d);
+//        
+//        return localDate2.toString();
+//    }
      
     @POST
     @Produces("text/plain")

@@ -42,48 +42,70 @@ public class PersonService {
         persons.add(new Person(4,"Pertti","pertti@pertti.com"));
         persons.add(new Person(5,"Tyyppi","tyyppi@tyyppi.com"));
     }
-     
-    @GET
+
+        @GET
     @Produces({"application/json","application/xml"})
     public List<Person> getPersons(@QueryParam("sort") @DefaultValue("id") String sort,
-            @QueryParam("filter") @DefaultValue("") String filter) {
-        Stream<Person> ps=persons.stream(); // luodaan streamista uusi lista
-                
-        if (sort.equals("id")) {
-            ps.sorted((a,b) -> a.getId()-b.getId());
-        } else {
-            ps=ps.sorted((a,b) -> a.getName().compareTo(b.getName()));
-        } // kun tiedetään, kumpaa kutsutaan
-        
-        List<Person> pl=ps //otetaan talteen ps ja kutsutaan sitten filtteriä
-                        .filter(p -> p.getName() // palauttaa streamin, jolle tehdään tämä toiminto
-                        .contains(filter)) // palauttaa jälleen uuden streamin, jolle tehdään toimint0
-                        .collect(Collectors.toList()); // jne.
-        
+            @QueryParam("filter") @DefaultValue("") String filter){
+        Stream<Person> ps=persons.stream();
+        if (sort.equals("id")) ps=ps.sorted((a,b) -> a.getId()-b.getId());
+        else ps=ps.sorted((a,b) -> a.getName().compareTo(b.getName()));
+        List<Person> pl=ps.filter(p -> p.getName().contains(filter)).collect(Collectors.toList());
         return pl;
-// alkujaan vain: return persons;
+        // Alunperin vain 
+        // return plist;
     }
     
     @GET
     @Produces("application/json")
     @Path("{id}")
     public Response getPerson(@PathParam("id") int id){
-        // stream!
-        // annettava not found, jos ei löydy        
-        Person pf=persons
-                .stream()
-                .filter(p -> p.getId()==id) //kysytään kyseisen Personin id, jonka täsmättävä(==) parametrin id:hen
-                .findFirst() // antaa listan nykyisestä järjestyksestä ensimmäisen kriteerit täyttävän alkion. jos löytyy, käytetään.
-                .orElse(null); // jos ei, palautetaan null
-        
-        if (pf==null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(new ErrorInfo(id,"Ei löydy"))
-                    .build();
-        }
-        
+        Person pf=persons.stream().filter(p -> p.getId()==id).findFirst().orElse(null);
+        if (pf==null) return Response.status(Response.Status.NOT_FOUND)
+                                    .entity(new ErrorInfo(id,"Ei löydy")).build();
         return Response.ok(pf).build();
     }
+//    @GET
+//    @Produces({"application/json","application/xml"})
+//    public List<Person> getPersons(@QueryParam("sort") @DefaultValue("id") String sort,
+//            @QueryParam("filter") @DefaultValue("") String filter) {
+//        Stream<Person> ps=persons.stream(); // luodaan streamista uusi lista
+//                
+//        if (sort.equals("id")) {
+//            ps.sorted((a,b) -> a.getId()-b.getId());
+//        } else {
+//            ps=ps.sorted((a,b) -> a.getName().compareTo(b.getName()));
+//        } // kun tiedetään, kumpaa kutsutaan
+//        
+//        List<Person> pl=ps //otetaan talteen ps ja kutsutaan sitten filtteriä
+//                        .filter(p -> p.getName() // palauttaa streamin, jolle tehdään tämä toiminto
+//                        .contains(filter)) // palauttaa jälleen uuden streamin, jolle tehdään toimint0
+//                        .collect(Collectors.toList()); // jne.
+//        
+//        return pl;
+//// alkujaan vain: return persons;
+//    }
+//    
+//    @GET
+//    @Produces("application/json")
+//    @Path("{id}")
+//    public Response getPerson(@PathParam("id") int id){
+//        // stream!
+//        // annettava not found, jos ei löydy        
+//        Person pf=persons
+//                .stream()
+//                .filter(p -> p.getId()==id) //kysytään kyseisen Personin id, jonka täsmättävä(==) parametrin id:hen
+//                .findFirst() // antaa listan nykyisestä järjestyksestä ensimmäisen kriteerit täyttävän alkion. jos löytyy, käytetään.
+//                .orElse(null); // jos ei, palautetaan null
+//        
+//        if (pf==null) {
+//            return Response.status(Response.Status.NOT_FOUND)
+//                    .entity(new ErrorInfo(id,"Ei löydy"))
+//                    .build();
+//        }
+//        
+//        return Response.ok(pf).build();
+//    }
     
     @POST
     @Produces("application/json")

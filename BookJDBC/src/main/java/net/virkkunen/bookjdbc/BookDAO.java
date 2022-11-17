@@ -86,6 +86,8 @@ public class BookDAO {
         }
         return booklist;
     }
+
+//create(new EPrice(httpClientPost()
     
     public Book create(Book b) {
         // prepared statement
