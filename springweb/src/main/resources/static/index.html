@@ -1,63 +1,68 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
     <head>
-        <title>Kirjailijat</title>
+        <title>Kirjat</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script>
             
-            let servicesRoot = "";
-    
-            function makeTheCall(url, method, data) {
-                return new Promise(function (resolve, reject) {
-                    let x = new XMLHttpRequest();
-                    x.onreadystatechange = function () {
-                        if (x.readyState == 4) {
-                            try {
-                                let obj = JSON.parse(x.responseText);
+            let servicesRoot="";
+            
+            function makeTheCall(url,method,data){
+                return new Promise(function(resolve,reject){
+                    let x=new XMLHttpRequest();
+                    x.onreadystatechange=function(){
+                        if (x.readyState==4) {
+                            try{
+                                let obj=JSON.parse(x.responseText);
                                 resolve(obj);
-                            } catch (ex) {
+                            }
+                            catch(ex){
                                 reject(x);
                             }
-                        }
-                        ;
+                        };
                     }
-                    x.open(method, servicesRoot + url, true);
-                    x.setRequestHeader("Content-Type", "application/json");
-                    x.setRequestHeader("Accept", "application/json");
+                    x.open(method,servicesRoot+url,true);
+                    x.setRequestHeader("Content-Type","application/json");
+                    x.setRequestHeader("Accept","application/json");
                     x.send(data && JSON.stringify(data));
                 });
             }
-
-            let HTTP = {
-                get: url => makeTheCall(url, "get"),
-                put: (url, data) => makeTheCall(url, "put", data),
-                post: (url, data) => makeTheCall(url, "post", data),
-                delete: (url) => makeTheCall(url, "delete")
-            };
             
+            let HTTP={
+                get: url => makeTheCall(url,"get"),
+                put: (url,data) => makeTheCall(url,"put",data),
+                post: (url,data) => makeTheCall(url,"post",data),
+                delete: (url) => makeTheCall(url,"delete")
+            };
 
-            function fillAuthors() {
+            function fillAuthors1(){
                 HTTP.get("/authors").then(authors => {
-                    let html = '';
+                    let html='';
                     authors.forEach(author => {
-                        html += `<option value="${author.id}">${author.firstName+' '+author.lastName}</option>`;
+                        html+=`<option value="${author.id}">${author.firstName+' '+author.lastName}</option>`;
                     });
-                    document.getElementById("authors").innerHTML = html;
+                    document.getElementById("authors1").innerHTML=html;
+                });
+            }
+
+            function fillAuthors2(){
+                HTTP.get("/authors").then(authors =>{
+                   let options='<option value="0">Not selected</option>'; 
+                   authors.forEach(author => {
+                       options+=`<option value="${author.id}">${author.firstName+' '+author.lastName}</option>`;
+                   });
+                   document.getElementById("authors2").innerHTML=options;
                 });
             }
 
             function getAuthor(id){
                 HTTP.get("/authors/"+id).then(author => {
                     document.getElementById("id").value=author.id;
-                    document.getElementById("firstname").value=author.firstName; 
-                    document.getElementById("lastname").value=author.lastName;
+                    document.getElementById("firstName").value=author.firstName; 
+                    document.getElementById("lastName").value=author.lastName;
                 });
-            }    
+            }
     
             function selectedChange(){
                 let id=document.getElementById("authors").value;
@@ -66,45 +71,39 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     
             function saveClicked(){
                 let id=document.getElementById("id").value;
-                let firstName=document.getElementById("firstname").value;
-                let lastName=document.getElementById("lastname").value;
+                let firstName=document.getElementById("firstName").value;
+                let lastName=document.getElementById("lastName").value;
                 let author={id,firstName,lastName};
-                let author2={"id":id,firstName,lastName};               
+                let author2={"id":id,firstName,lastName};
                 HTTP.put("/authors/"+id,author).then(a => {
                     console.log("Author saved");
                     fillAuthors();
                 });
-            }    
-            
-            window.onload = function () {
-                fillAuthors();
-                document.getElementById("authors").addEventListener("change", selectedChange);
-                document.getElementById("searchButton").addEventListener("click", searchClicked);
             }
             
+            window.onload=function(){
+                fillAuthors1();
+                fillAuthors2();
+                document.getElementById("authors1").addEventListener("change",selectedChange);
+                document.getElementById("saveButton").addEventListener("click",saveClicked);
+            }
         </script>
     </head>
     <body>
         <div class="container">
             <header>
-                <!-- <img src="logo.png" alt="filename" align="center"/> -->
                 <h1>Kirjailijasovellus</h1>
             </header>
-            <!-- 
-            <nav>
-                <a href="index.html">Tähän linkkejä</a>
-            </nav> 
-            --> 
             <main>
                 <section class="form">
-                    <input type="hidden" id="id" />
+                    <input type="hidden" id="authorId" />
                     <div class="input">
-                        <label for="firstname">Author first name</label>
+                        <label for="firstName">First name</label>
                         <input id="firstName" />
                     </div>
                     <div class="input">
-                        <label for="lastname">Author last name</label>
-                        <input id="lastName" />
+                        <label for="lastName">Author name</label>
+                        <select id="authors2"></select>
                     </div>
                     <div class="buttons">
                         <input id="saveButton" type="button" value="Save" />
@@ -112,7 +111,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </div>
                 </section>
                 <section>
-                    <select id ="authors" size="8"></select>
+                    <select id="authors1" size="8">
+                        
+                    </select>
                 </section>
             </main>
         </div>

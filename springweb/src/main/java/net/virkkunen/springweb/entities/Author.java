@@ -20,17 +20,17 @@ public class Author {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(name="firstname")
-    private String firstname;
+    private String firstName;
     @Column(name="lastname")
-    private String lastname;
+    private String lastName;
 
     @Override
     public boolean equals(Object o){
         if (o.getClass() != Author.class ) return false; 
         Author other = (Author)o;
         if (this.getId() != other.id) return false;
-        if (!this.firstname.equals(other.firstname)) return false;
-        if (!this.lastname.equals(other.lastname)) return false;
+        if (!this.firstName.equals(other.firstName)) return false;
+        if (!this.lastName.equals(other.lastName)) return false;
         return true;
     }
 
@@ -54,31 +54,31 @@ public class Author {
     }
 
     /**
-     * @return the firstname
+     * @return the firstName
      */
     public String getFirstName() {
-        return firstname;
+        return firstName;
     }
 
     /**
-     * @param firstname the firstname to set
+     * @param firstName the firstName to set
      */
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
-     * @return the lastname
+     * @return the lastName
      */
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
-     * @param lastname the lastname to set
+     * @param lastName the lastName to set
      */
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
         
 }

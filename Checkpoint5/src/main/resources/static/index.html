@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kirjat</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="paintings.css" rel="stylesheet" />
+        <script>
+            
+            function makeTheCall(url,method,data){
+                return new Promise(function(resolve,reject){
+                    let x=new XMLHttpRequest();
+                    x.onreadystatechange=function(){
+                        if (x.readyState==4) {
+                            try{
+                                let obj=JSON.parse(x.responseText);
+                                resolve(obj);
+                            }
+                            catch(ex){
+                                reject(x);
+                            }
+                        };
+                    }
+                    x.open(method,url,true);
+                    x.setRequestHeader("Content-Type","application/json");
+                    x.setRequestHeader("Accept","application/json");
+                    x.send(data && JSON.stringify(data));
+                });
+            }
+            
+            let HTTP={
+                get: url => makeTheCall(url,"get"),
+                put: (url,data) => makeTheCall(url,"put",data),
+                post: (url,data) => makeTheCall(url,"post",data),
+                delete: (url) => makeTheCall(url,"delete")
+            };
+
+            function fillPaintings(){
+                // Hae maalaukset kontrollerilta ja täytä ne sivulla olevaan select-kenttään
+            }
+
+            function getPainting(id){
+                // Varmista, että urli vastaa kontrollerisi urlia 
+                HTTP.get("/paintings/"+id).then(painting => {
+                    document.getElementById("paintingId").value=painting.id;
+                    document.getElementById("name").value=painting.name; 
+                    document.getElementById("artist").value=painting.artist;
+                });
+            }
+    
+            function selectedChange(){
+                let id=document.getElementById("paintings").value;
+                getPainting(id);
+            }
+    
+            function saveClicked(){
+                console.log("Save");
+                // Lue maalauksen tiedot syöttökentistä
+                // Muodosta niistä objekti ja lähetä se palvelimelle
+                // Kun saat vastauksen, niin täytä lista uudelleen kutusmalla fillPaintings-funktiota
+            }
+            
+            /// END OF 1 point
+            
+            function createClicked(){
+                console.log("Create");
+                // Luo uusi maalaus syöttökentistä löytyvillä tiedoilla
+                // Saatuasi vastauksen täytä lista uudelleen
+            }
+            
+            function deleteClicked(){
+                console.log("Delete");
+                // Poista kirja
+                // Saatuasi vastauksen täytä lista uudelleen
+            }
+            
+            function searchChanged(){
+                let search=document.getElementById("search").value;
+                console.log("Search:",search);
+                // Muokkaa kontrolleria siten, että voit antaa sille "search"-parametrin
+                // Vastauksena saat listan maalauksista, joiden nimessä esiintyy annettu termi
+                // Täytä lista uudelleen saamillasi maalauksilla
+            }
+            
+            // END OF 2 points
+            
+            // 3 Points=Täytä kirjat myös sivun alareunan taulokkoon
+            // Taulokkokin saa esittää pelkästään hakuun täsmäävät kirjat
+            
+            window.onload=function(){
+                fillPaintings();
+                document.getElementById("paintings").addEventListener("change",selectedChange);
+                document.getElementById("saveButton").addEventListener("click",saveClicked);
+                document.getElementById("createButton").addEventListener("click",createClicked);
+                document.getElementById("deleteButton").addEventListener("click",deleteClicked);
+                document.getElementById("search").addEventListener("keyup",searchChanged);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <img src="vincent.jpg" />
+                <h1>Maalauksia</h1>
+            </header>
+            <nav>
+                <a href="index.html">Taulut</a>
+                <a href="ajaxclient.html">AjaxClient</a>
+            </nav>
+            <main>
+                <section class="form">
+                    <input type="hidden" id="paintingId" />
+                    <div class="input">
+                        <label for="name">Name</label>
+                        <input id="name" />
+                    </div>
+                    <div class="input">
+                        <label for="artist">Artist</label>
+                        <input id="artist" />
+                    </div>
+                    <div class="buttons">
+                        <input id="saveButton" type="button" value="Save" />
+                        <input id="createButton" type="button" value="Create" />
+                        <input id="deleteButton" type="button" value="Delete" />
+                    </div>
+                </section>
+                <section class="listing">
+                    <input id="search" placeholder="Etsi" />
+                    <select id="paintings" size="10">
+                        
+                    </select>
+                </section>
+            </main>
+            <div class="extra">
+                <table>
+                    <thead>
+                        <tr><th>Id</th><th>Name</th><th>Artist</th></tr>
+                    </thead>
+                    <tbody id="booksTable">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <footer>Copyright (c) Coders Unlimited</footer>
+        </div>
+    </body>
+</html>

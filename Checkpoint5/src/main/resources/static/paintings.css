@@ -1,0 +1,73 @@
+html, body, div, p{
+    margin:0;
+    padding:0;
+} 
+
+p{
+    margin-bottom:10px;
+}
+
+.container{
+    width:80%;
+    margin:0 auto;
+}
+
+header{
+    border-bottom: 1px solid #204080;
+    display: grid;
+    grid-template-columns: 80px auto;
+}
+
+
+nav {
+    padding: 5px 0;
+    border-bottom: 1px solid #204080;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+nav a{
+    margin-right: 20px;
+}
+main{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    min-height: 200px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+footer{
+    border-top: 1px solid #204080;
+    margin-top:20px;
+}
+
+.input{
+    margin-bottom: 10px;
+}
+
+.input label{
+    display: block;
+    margin:0;
+}
+
+select#paintings {
+    width: 280px;
+}
+
+#search{
+    width: 270px;
+}
+
+header img{
+    height: 60px;
+}
+
+table{
+    width: 600px;
+    margin: 0 auto;
+}
+
+th{
+    text-align: left;
+}
