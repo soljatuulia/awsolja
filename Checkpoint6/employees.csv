@@ -1,0 +1,7 @@
+Name;EmployeeId;SuperiorId
+Kalle;kalle;
+Teuvo;teuvo;kalle
+Tuomas;tuomo;kalle
+Anneli;anne;
+Liisa;lissu;anne
+Elina;ellu;anne

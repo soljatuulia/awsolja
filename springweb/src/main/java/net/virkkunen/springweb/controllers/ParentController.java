@@ -84,8 +84,7 @@ public class ParentController {
             iterate(sub,level+1);
         }
     }
-*/
-    /*
+
         Organization root=new Organization("Root");
         ol.stream().forEach(o -> {
             Organization parent=ol.stream().filter(op -> op.getId()==o.getParentId()).findFirst().orElse(null);

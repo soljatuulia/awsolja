@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class ParentHier {
     
     private Integer id;
-    //@JsonIgnore //json-muotoiluun
+    @JsonIgnore //json-muotoiluun
     private Integer parentId;
     private String name;
-    //@JsonInclude(Include.NON_NULL)
+    @JsonInclude(Include.NON_NULL)
     private ArrayList<ParentHier> children; //alkuperäisestä luokasta puuttui Children-kokoelma, se lisättiin tänne. (Koska puuttuu tietokannasta ja sinne ei haluta koskea?)
     
     public ParentHier() {
@@ -35,9 +35,10 @@ public class ParentHier {
     public void addChild(ParentHier child) {
         if (children==null) {
             children = new ArrayList<ParentHier>(); //jos ei vielä ole children-listaa, luodaan sellainen
-        } else {
-            children.add(child); //jos/kun on lista, lisätään objekti sinne
-        }
+        } 
+            
+        children.add(child); //lisätään objekti/lapsi listalle
+        
     }
 
     /**

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Työntekijät</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles.css" rel="stylesheet" />
+        <script src="scripts.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="eka">
+                <h1>Eka juttu</h1>
+                <p>Http GET osoitteeseen /employees pitäisi palauttaa kaikki tieto employee-taulusta.</p>
+                <input id="ekatesti" type="button" value="Kokeile" />
+                <p id="ekatulos">Ei toimi vielä</p>
+            </div>
+            <div id="toka" class="hidden">
+                <div class="onnittelut">
+                    <p>Onneksi olkoon, läpäisit checkpointin!</p>
+                    <p>Muutamalla pikkujutulla voit kuitenkin saada lisäpisteitä...</p>
+                </div>
+                <main>
+                <div class="form">
+                    <div class="input">
+                        <label for="name">Nimi</label>
+                        <input id="name" />
+                    </div>
+                    <div class="input">
+                        <label for="empid">Tunnus</label>
+                        <input id="empid" />
+                    </div>
+                    <div class="input">
+                        <label for="superior">Esimies</label>
+                        <select id="superior"></select>
+                    </div>
+                    <input type="button" id="create" value="Tee uusi työntekijä" />
+                    <p>Napin painallus lähettää työntekijän tiedot HTTP POST-menetelmällä
+                    osoitteeseen /employees. Tiedot saisivat toki tallettua tietokantaan....</p>
+                </div>
+                <div id="drop">
+                    <p>Tähän pitäisi pystyä "raahaamaan" projektin juurihakemistosta löytyvä 
+                        employees.csv -tiedosto. Tiedoston sisältö lähetetään HTTP POST 
+                        -menetelmällä osoitteeseen /employees/upload. Lähetetyn datan content-type on text/csv.
+                        Vastauksena tulisi tulla jonkinlainen json-objekti (sisällöllä ei ole väliä).
+                    </p>
+                    <p>Tiedoston henkilöt tulisi tietenkin lisätä tietokantaan.....</p>
+                </div>
+                <div>
+                    <p>Ja vielä HTTP GET osoitteeseen <a href="/employees/hierarchy">/employees/hierarchy</a>. 
+                        Vastauksena tulisi tulla seuraavan kaltaista json:a.</p>
+<pre>
+[
+    {"id":1,"name":"Tuomas","employeeId":"tuomas","subordinates":[
+        {"id":2,"name":"Simeoni","employeeId":"simo"},
+        {"id":3,"name":"Lauri","employeeId":"late"}
+        ]},
+    {"id":4,"name":"Eero","employeeId":"eero","subordinates":[
+        {"id":5,"name":"Juhani","employeeId":"jussi"}
+        ]},
+    {"id":6,"name":"Kalle","employeeId":"kalle","subordinates":[
+        {"id":7,"name":"Teuvo","employeeId":"teuvo"},
+        {"id":8,"name":"Tuomas","employeeId":"tuomo"}
+        ]},
+    {"id":9,"name":"Anneli","employeeId":"anne","subordinates":[
+        {"id":10,"name":"Liisa","employeeId":"lissu"},
+        {"id":11,"name":"Elina","employeeId":"ellu"}
+    ]}
+]
+</pre>               
+                </div>
+                </main>
+            <div>
+                <h3>Vieläkin on aikaa?</h3>
+                <p>Konserniin on juuri hankittu uusi yritys ja sen henkilöstä pitäisi myös
+                   saada meidän järjestelmäämme.  Sovelluksen käynnistyksen yhteydessä
+                   tulee tarkistaa, että löytyykö osoitteesta <a href="https://tutorit.net/courses/personnel.json">https://tutorit.net/courses/personnel.json</a> -tiedosto,
+                   jossa hankitun yrityksen henkilöstä on (löytyyhän sieltä). Valitettavasti sen muotoilu ei ihan täsmää tietomalliimme,
+                   joudumme olettamaan että:
+                <ul>
+                    <li>Johtaja (director) on osastopäälliköiden esimies</li>
+                    <li>Osastopäällikkö (manager) on osaston henkilöiden esimies</li>
+                    <li>Kaikkien employeeId on nimi kirjoitettuna pienellä</li>
+                </ul>
+                   
+                </p>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

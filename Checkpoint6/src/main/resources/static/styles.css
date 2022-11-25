@@ -1,0 +1,48 @@
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+#eka{
+    text-align: center;
+}
+
+#toka main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.onnittelut{
+    text-align: center;
+    border-bottom: 1px solid #a0a0a0;
+    margin-bottom: 10px;
+}
+
+.onnittelut p{
+    margin:0;
+    padding:0;
+}
+
+.hidden{
+    display:none;
+}
+
+.error{
+    border: 1px solid red;
+}
+
+.input label{
+    display:block;
+}
+
+#drop{
+    border: 1px solid #808080;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+pre{
+    font-size: 8pt;
+}
