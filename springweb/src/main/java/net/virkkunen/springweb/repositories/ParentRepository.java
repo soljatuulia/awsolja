@@ -4,19 +4,13 @@
  */
 package net.virkkunen.springweb.repositories;
 
-import java.util.List;
-import net.virkkunen.springweb.entities.Car;
-import net.virkkunen.springweb.entities.Person;
+import net.virkkunen.springweb.entities.Parent;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  *
  * @author Solja
  */
-public interface CarsRepository extends JpaRepository<Car,Integer> {
-
-    @Query("SELECT c FROM Car c")
-    List<Car> findFiltered(String filt);
+public interface ParentRepository extends JpaRepository<Parent, Integer> {
     
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function init(){
+                var con=new WebSocket("ws://localhost:8080/BooksWeb/monitor");
+                con.onopen=function(){
+                    console.log("asdfasdf");
+                    con.send("Hello");
+                }
+                con.onmessage=function(msg){
+                    var data=msg.data;
+                    document.getElementById("reply").innerHTML=data;
+                }
+                initDraw();
+            }
+            
+            
+function initDraw(){
+	var c=document.getElementById("canvas");
+	var ctx=c.getContext("2d");
+	ctx.beginPath();
+	ctx.moveTo(10,10);
+	ctx.lineTo(10,180);
+	ctx.lineTo(190,180);
+	ctx.stroke();
+	for(var i=10;i<200;i+=20){
+		ctx.font="8pt Arial";
+		ctx.fillText(i-10,i,190);
+	}
+	var arr=[100];
+	if (sessionStorage["piirtodata"]){
+		console.log("lÃ¶ytyi");
+		arr=sessionStorage["piirtodata"].split(",");
+	}
+        var con=new WebSocket("ws://localhost:8080/BooksWeb/monitor");
+	con.onmessage=function(msg){
+                console.log("Got "+msg.data)
+		var prev=Number(arr[arr.length-1]);
+		arr.push(Number(msg.data));
+		sessionStorage["piirtodata"]=arr.join(",");
+		ctx.clearRect(10,10,180,170);
+		ctx.beginPath();
+		var beg=arr.length>19 ? arr.length-19 : 0;
+		ctx.moveTo(10,Number(arr[beg]));
+		for(var i=beg;i<arr.length;i++){
+			ctx.lineTo(10*(i-beg)+10,Number(arr[i]));
+		}
+		ctx.stroke();
+	}
+}
+
+            
+        </script>
+    </head>
+    <body onload="init()">
+        <div>Server sent: <span id="reply">xx</span></div>
+        <canvas id="canvas" width="200" height="200" style="border:1px solid black" >
+        </canvas>
+    </body>
+</html>

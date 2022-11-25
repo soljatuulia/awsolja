@@ -15,7 +15,6 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface PaintingsRepository extends JpaRepository<Painting,Integer> {
 
-    @Query("SELECT p FROM Painting p WHERE p.name LIKE %:filt% OR p.artist LIKE %:filt%")
-    List<Painting> findFiltered(String filt);
+    public List<Painting> findByNameContains(String name);
     
 }

@@ -39,12 +39,18 @@
 
             function fillPaintings(){
                 // Hae maalaukset kontrollerilta ja täytä ne sivulla olevaan select-kenttään
+                let url='/paintings';
+                let filter=document.getElementById("search").value;
+                if (filter) url+='?filter='+filter;
                 HTTP.get("/paintings").then(paintings => {
-                    let html = '';
+                    let htmlOptions='';
+                    let htmlTable='';                    
                     paintings.forEach(painting => {
-                        html += `<option value="${painting.id}">${painting.artist}: ${painting.name}</option>`;
+                        htmlOptions+=`<option value="${painting.id}">${painting.name}</option>`; 
+                        htmlTable+=`<tr><td>${painting.id}</td><td>${painting.name}</td><td>${painting.artist}</td></tr>`;
                     });
-                    document.getElementById("paintings").innerHTML = html;
+                    document.getElementById("paintings").innerHTML=htmlOptions;
+                    document.getElementById("booksTable").innerHTML=htmlTable;
                 });
             }                
 
@@ -73,7 +79,8 @@
                 let painting = {id, name, artist};
                 HTTP.put("/paintings/" + id, painting).then(p => {
                     console.log("Painting saved");
-                    fillPaintings();
+                    fillPaintings(); 
+                    getPainting(id);
                 });
             }
             
@@ -83,13 +90,13 @@
                 console.log("Create");
                 // Luo uusi maalaus syöttökentistä löytyvillä tiedoilla
                 // Saatuasi vastauksen täytä lista uudelleen
-                let id = document.getElementById("paintingId").value;
                 let name = document.getElementById("name").value;
                 let artist = document.getElementById("artist").value;
-                let painting = {id, name, artist};
-                HTTP.post("/paintings/" + id, painting).then(p => {
+                let painting = {name, artist};
+                HTTP.post("/paintings/" + painting).then(p => {
                     console.log("Painting added");
                     fillPaintings();
+                    getPainting(painting.id);                    
                 });                
             }
             
@@ -99,6 +106,7 @@
                 // Saatuasi vastauksen täytä lista uudelleen
                 let id = document.getElementById("paintingId").value;
                 HTTP.delete("/paintings/" + id).then(() => {
+                    console.log("Delete resp",resp);
                     fillPaintings();
                 });                
             }
@@ -109,16 +117,7 @@
                 // Muokkaa kontrolleria siten, että voit antaa sille "search"-parametrin
                 // Vastauksena saat listan maalauksista, joiden nimessä esiintyy annettu termi
                 // Täytä lista uudelleen saamillasi maalauksilla
-                let newArray=paintings.filter(b => b.title.includes(search))
-                                .sort((a,b) => a.title.localeCompare(b.title))
-                                .map(b => b.title);
-                    console.log(newArray);                
-                HTTP.get("/paintings/" + search).then(painting => {
-                    document.getElementById("paintingId").value=painting.id;
-                    document.getElementById("name").value=painting.name; 
-                    document.getElementById("artist").value=painting.artist;
                     fillPaintings();
-                });
             }
             
             // END OF 2 points

@@ -38,9 +38,9 @@ public class PaintingsController {
 //    }
     
     @GetMapping
-    public List<Painting> getAll(@RequestParam(defaultValue="") String search) {
-        return repo.findFiltered("%" + search + "%");
-    }    
+    List<Painting> getAll(@RequestParam(defaultValue="") String filter) {
+        return repo.findByNameContains(filter);
+    }      
 
     @GetMapping("/{id}")
     Painting get(@PathVariable int id) {
