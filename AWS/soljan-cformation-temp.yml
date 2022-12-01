@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Academy Demo CloudFormation
+Parameters:
+  QueName:
+    Description : Name for queue
+    Type : String
+    Default : soljan jono
+Resources:
+  MyQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: !Ref QueName
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Description: Creating S3 bucket from Cloudformation
+    Properties: 
+      BucketName: soljan-cfbucket
+Outputs:
+  S3Bucket:
+    Description: Bucker Created using this template.
+    Value: !Ref S3Bucket
+
+

@@ -24,10 +24,14 @@ import org.springframework.web.server.ResponseStatusException;
 public class EmployeeController {
     @Autowired
     EmployeeRepository repo;
-    
+
+    @GetMapping
+    public List<Employee> getAll(){
+        return repo.findAll();
+    }    
    
     @GetMapping("/hierarchy")
-    public List<EmployeeHier> getAll(){
+    public List<EmployeeHier> getHierarchy(){
         ArrayList<EmployeeHier> ret = new ArrayList<>(); 
 
         List<EmployeeHier> el = repo.findAll().stream()
@@ -61,9 +65,9 @@ public class EmployeeController {
         return e;
     }
     
-    /*
+/*
     @PostMapping(value="/upload", produces="application/json", consumes="text/csv")
-    Employee upload(@RequestParam("file") MultipartFile file) {
+    Employee upload(@RequestBody String data) {
 
         
     }
